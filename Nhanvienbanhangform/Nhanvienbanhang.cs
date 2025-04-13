@@ -8,16 +8,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace FINAL_PROJECT_ST2.AdminForm
+namespace FINAL_PROJECT_ST2.Nhanvienbanhangform
 {
-    public partial class adminForm: Form
+    public partial class Nhanvienbanhang: Form
     {
-        public adminForm()
+        public Nhanvienbanhang()
         {
             InitializeComponent();
         }
 
-        private void AdminForm_Load(object sender, EventArgs e)
+        private void Nhanvienbanhang_Load(object sender, EventArgs e)
         {
 
         }

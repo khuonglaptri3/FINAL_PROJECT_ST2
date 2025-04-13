@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace FINAL_PROJECT_ST2.Nhanvienbanhangform
+namespace FINAL_PROJECT_ST2.NhanviennhapkhoForm
 {
-    public partial class Form1: Form
+    public partial class Nhapkho : Form
     {
-        public Form1()
+        public Nhapkho()
         {
             InitializeComponent();
         }

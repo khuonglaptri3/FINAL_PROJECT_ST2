@@ -57,15 +57,53 @@ namespace FINAL_PROJECT_ST2
                         }
                     // haha
 
-                        if (check)
+                    if (check)
+                    {
+                        MessageBox.Show("Login successful", "Success Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                  
+                        int maNND = -1;
+                        using (SqlCommand cmd = new SqlCommand("SELECT dbo.fn_GetMaNND(@Tentaikhoan, @Matkhau)", conn))
                         {
-                            MessageBox.Show("Login successful", "Success Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            // Có thể mở form chính tại đây
+                            cmd.Parameters.AddWithValue("@Tentaikhoan", Username.Text);
+                            cmd.Parameters.AddWithValue("@Matkhau", Password.Text);
+                            object result = cmd.ExecuteScalar();
+                            if (result != null && result != DBNull.Value)
+                            {
+                                maNND = Convert.ToInt32(result);
+                            }
                         }
-                        else
+                        if (maNND == 1)
                         {
-                            MessageBox.Show("Login failed", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                            FINAL_PROJECT_ST2.AdminForm.adminForm adminForm = new FINAL_PROJECT_ST2.AdminForm.adminForm();
+                            adminForm.Show();
+                            this.Hide();
+
                         }
+                        else if (maNND == 3)
+                        {
+                            FINAL_PROJECT_ST2.ChucuahangForm.SalesForm chucuahangform = new FINAL_PROJECT_ST2.ChucuahangForm.SalesForm();
+                            chucuahangform.Show();
+                            this.Hide();
+                        }
+                        else if (maNND == 2)
+                        {
+                            FINAL_PROJECT_ST2.Nhanvienbanhangform.Nhanvienbanhang nhanvienbanhang = new FINAL_PROJECT_ST2.Nhanvienbanhangform.Nhanvienbanhang();
+                            nhanvienbanhang.Show();
+                            this.Hide();
+
+                        }
+                        else { 
+                            FINAL_PROJECT_ST2.NhanviennhapkhoForm.Nhapkho nhapkho = new FINAL_PROJECT_ST2.NhanviennhapkhoForm.Nhapkho();
+                            nhapkho.Show();
+                            this.Hide();     
+                        }
+                        
+                    }
+                    else
+                    {
+                        MessageBox.Show("Login failed", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                     }
                     catch (Exception ex)
                     {
@@ -73,12 +111,18 @@ namespace FINAL_PROJECT_ST2
                     }
                     finally
                     {
-                    
-                    }
+                    connect.CreateConnection().Close();  
+
+                }
                 }
             }
 
         private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void panel3_Paint(object sender, PaintEventArgs e)
         {
 
         }

@@ -19,7 +19,7 @@ namespace FINAL_PROJECT_ST2
         }
         public DatabaseHelper()
         {
-            ConnectionString = @"Data Source=KHUONG;Initial Catalog=FINAL_FROJECT_LAST_VERSION;Integrated Security=True;Encrypt=False;TrustServerCertificate=True";
+            ConnectionString = @"Data Source=KHUONG;Initial Catalog=TEST_DATABASE;Integrated Security=True;Encrypt=False;TrustServerCertificate=True";
         }
         public DatabaseHelper(string connectionString)
         {

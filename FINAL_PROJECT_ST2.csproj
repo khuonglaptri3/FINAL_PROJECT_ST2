@@ -52,11 +52,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdminForm\AdminForm.cs">
+    <Compile Include="AdminForm\adminForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AdminForm\AdminForm.Designer.cs">
-      <DependentUpon>AdminForm.cs</DependentUpon>
+    <Compile Include="AdminForm\adminForm.Designer.cs">
+      <DependentUpon>adminForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ChucuahangForm\ChucuahangForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChucuahangForm\ChucuahangForm.Designer.cs">
+      <DependentUpon>ChucuahangForm.cs</DependentUpon>
     </Compile>
     <Compile Include="DatabaseHelper.cs" />
     <Compile Include="LoginForm.cs">
@@ -65,19 +71,31 @@
     <Compile Include="LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Nhanvienbanhangform\Form1.cs">
+    <Compile Include="Nhanvienbanhangform\Nhanvienbanhang.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Nhanvienbanhangform\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Nhanvienbanhangform\Nhanvienbanhang.Designer.cs">
+      <DependentUpon>Nhanvienbanhang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NhanviennhapkhoForm\Nhapkho.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NhanviennhapkhoForm\Nhapkho.Designer.cs">
+      <DependentUpon>Nhapkho.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="AdminForm\AdminForm.resx">
-      <DependentUpon>AdminForm.cs</DependentUpon>
+    <EmbeddedResource Include="AdminForm\adminForm.resx">
+      <DependentUpon>adminForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChucuahangForm\ChucuahangForm.resx">
+      <DependentUpon>ChucuahangForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Nhanvienbanhangform\Nhanvienbanhang.resx">
+      <DependentUpon>Nhanvienbanhang.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -102,9 +120,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ChucuahangForm\" />
-    <Folder Include="NhanviennhapkhoForm\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

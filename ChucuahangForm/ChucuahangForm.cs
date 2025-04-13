@@ -8,16 +8,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace FINAL_PROJECT_ST2.AdminForm
+namespace FINAL_PROJECT_ST2.ChucuahangForm
 {
-    public partial class adminForm: Form
+    public partial class SalesForm : Form
     {
-        public adminForm()
+        public SalesForm()
         {
             InitializeComponent();
         }
 
-        private void AdminForm_Load(object sender, EventArgs e)
+        private void SalesForm_Load(object sender, EventArgs e)
         {
 
         }

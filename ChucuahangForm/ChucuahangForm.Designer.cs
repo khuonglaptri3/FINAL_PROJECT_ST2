@@ -1,6 +1,6 @@
-﻿namespace FINAL_PROJECT_ST2.AdminForm
+﻿namespace FINAL_PROJECT_ST2.ChucuahangForm
 {
-    partial class adminForm
+    partial class SalesForm
     {
         /// <summary>
         /// Required designer variable.
@@ -30,14 +30,14 @@
         {
             this.SuspendLayout();
             // 
-            // AdminForm
+            // SalesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Name = "AdminForm";
-            this.Text = "AdminForm";
-            this.Load += new System.EventHandler(this.AdminForm_Load);
+            this.Name = "SalesForm";
+            this.Text = "SalesForm";
+            this.Load += new System.EventHandler(this.SalesForm_Load);
             this.ResumeLayout(false);
 
         }
