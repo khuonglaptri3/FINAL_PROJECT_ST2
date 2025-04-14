@@ -16,8 +16,8 @@ namespace FINAL_PROJECT_ST2
         DatabaseHelper connect; 
         public Uc_ThemKhachHang()
         {
+            connect = new DatabaseHelper();
             InitializeComponent();
-            connect = new DatabaseHelper();  
             LoadDanhSachKhachHang();   
             
         }

@@ -202,6 +202,7 @@
             this.button_managecourse.TabIndex = 4;
             this.button_managecourse.Text = " Tìm kiếm khách hàng";
             this.button_managecourse.UseVisualStyleBackColor = true;
+            this.button_managecourse.Click += new System.EventHandler(this.button_managecourse_Click);
             // 
             // button_newcourse
             // 

@@ -16,7 +16,8 @@ namespace FINAL_PROJECT_ST2
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FINAL_PROJECT_ST2.Nhanvienbanhangform.Nhanvienbanhang());
+            Application.Run(new LoginForm());
+            //FINAL_PROJECT_ST2.Nhanvienbanhangform.Nhanvienbanhang(
         }
     }
 }

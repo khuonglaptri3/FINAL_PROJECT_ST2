@@ -105,6 +105,16 @@ namespace FINAL_PROJECT_ST2.Nhanvienbanhangform
         private void guna2Panel1_Paint_1(object sender, PaintEventArgs e)
         {
 
+
+        }
+
+        private void button_managecourse_Click(object sender, EventArgs e)
+        {
+            guna2Panel1.Controls.Clear();   
+            TimkiemkhachhangForm uc = new TimkiemkhachhangForm();    
+            uc.Dock = DockStyle.Fill;    
+            guna2Panel1.Controls.Add(uc);     
+
         }
     }
 }

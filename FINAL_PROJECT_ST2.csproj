@@ -77,11 +77,11 @@
     <Compile Include="Nhanvienbanhangform\Nhanvienbanhang.Designer.cs">
       <DependentUpon>Nhanvienbanhang.cs</DependentUpon>
     </Compile>
-    <Compile Include="Nhanvienbanhangform\ThemkhachhangForm.cs">
-      <SubType>Form</SubType>
+    <Compile Include="Nhanvienbanhangform\TimkiemkhachhangForm.cs">
+      <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Nhanvienbanhangform\ThemkhachhangForm.Designer.cs">
-      <DependentUpon>ThemkhachhangForm.cs</DependentUpon>
+    <Compile Include="Nhanvienbanhangform\TimkiemkhachhangForm.Designer.cs">
+      <DependentUpon>TimkiemkhachhangForm.cs</DependentUpon>
     </Compile>
     <Compile Include="NhanviennhapkhoForm\Nhapkho.cs">
       <SubType>Form</SubType>
@@ -109,8 +109,8 @@
     <EmbeddedResource Include="Nhanvienbanhangform\Nhanvienbanhang.resx">
       <DependentUpon>Nhanvienbanhang.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Nhanvienbanhangform\ThemkhachhangForm.resx">
-      <DependentUpon>ThemkhachhangForm.cs</DependentUpon>
+    <EmbeddedResource Include="Nhanvienbanhangform\TimkiemkhachhangForm.resx">
+      <DependentUpon>TimkiemkhachhangForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Nhanvienbanhangform\Uc_ThemKhachHang.resx">
       <DependentUpon>Uc_ThemKhachHang.cs</DependentUpon>
