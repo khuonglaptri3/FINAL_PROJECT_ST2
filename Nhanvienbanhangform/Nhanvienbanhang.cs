@@ -18,50 +18,50 @@ namespace FINAL_PROJECT_ST2.Nhanvienbanhangform
         {
             connect = new DatabaseHelper();
             InitializeComponent();
-            showallmembership(); 
+            //showallmembership(); 
         }
-        private void showallmembership()
-        {
-            try
-            {
-                SqlConnection conn = connect.CreateConnection();
-                conn.Open();
+        //private void showallmembership()
+        //{
+        //    try
+        //    {
+        //        SqlConnection conn = connect.CreateConnection();
+        //        conn.Open();
 
-                string query = "SELECT * FROM v_TatCaKhachHang";
-                SqlCommand cmd = new SqlCommand(query, conn);
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
+        //        string query = "SELECT * FROM v_TatCaKhachHang";
+        //        SqlCommand cmd = new SqlCommand(query, conn);
+        //        SqlDataAdapter da = new SqlDataAdapter(cmd);
+        //        DataTable dt = new DataTable();
+        //        da.Fill(dt);
 
-                guna2DataGridView1.DataSource = dt;
-                guna2DataGridView1.Columns[0].HeaderText = "Mã KH";
-                guna2DataGridView1.Columns[1].HeaderText = "Tên KH";
-                guna2DataGridView1.Columns[2].HeaderText = "Ngày Sinh";
-                guna2DataGridView1.Columns[3].HeaderText = "SĐT";
-                guna2DataGridView1.Columns[4].HeaderText = "Giới Tính";
-                guna2DataGridView1.Columns[5].HeaderText = "Thành Phố";
-                guna2DataGridView1.Columns[6].HeaderText = "Quận";
-                guna2DataGridView1.Columns[7].HeaderText = "Đường";
-                guna2DataGridView1.Columns[8].HeaderText = "Số Nhà";
-                guna2DataGridView1.Columns[9].HeaderText = "Mã Số Thẻ";
-                guna2DataGridView1.Columns[10].HeaderText = "Ngày Cấp";
-                guna2DataGridView1.Columns[11].HeaderText = "Điểm Tích Lũy";
-                guna2DataGridView1.Columns[12].HeaderText = "Loại Thẻ";
+        //        guna2DataGridView1.DataSource = dt;
+        //        guna2DataGridView1.Columns[0].HeaderText = "Mã KH";
+        //        guna2DataGridView1.Columns[1].HeaderText = "Tên KH";
+        //        guna2DataGridView1.Columns[2].HeaderText = "Ngày Sinh";
+        //        guna2DataGridView1.Columns[3].HeaderText = "SĐT";
+        //        guna2DataGridView1.Columns[4].HeaderText = "Giới Tính";
+        //        guna2DataGridView1.Columns[5].HeaderText = "Thành Phố";
+        //        guna2DataGridView1.Columns[6].HeaderText = "Quận";
+        //        guna2DataGridView1.Columns[7].HeaderText = "Đường";
+        //        guna2DataGridView1.Columns[8].HeaderText = "Số Nhà";
+        //        guna2DataGridView1.Columns[9].HeaderText = "Mã Số Thẻ";
+        //        guna2DataGridView1.Columns[10].HeaderText = "Ngày Cấp";
+        //        guna2DataGridView1.Columns[11].HeaderText = "Điểm Tích Lũy";
+        //        guna2DataGridView1.Columns[12].HeaderText = "Loại Thẻ";
                
 
 
-                guna2DataGridView1.DefaultCellStyle.Font = new Font("Segoe UI", 10); // Hoặc font bạn thích
-                guna2DataGridView1.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 11, FontStyle.Bold);
+        //        guna2DataGridView1.DefaultCellStyle.Font = new Font("Segoe UI", 10); // Hoặc font bạn thích
+        //        guna2DataGridView1.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 11, FontStyle.Bold);
 
-                guna2DataGridView1.ScrollBars = ScrollBars.Both;
+        //        guna2DataGridView1.ScrollBars = ScrollBars.Both;
 
-                conn.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi khi hiển thị thẻ thành viên: " + ex.Message);
-            }
-        }
+        //        conn.Close();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show("Lỗi khi hiển thị thẻ thành viên: " + ex.Message);
+        //    }
+        //}
 
 
         private void Nhanvienbanhang_Load(object sender, EventArgs e)
@@ -85,6 +85,24 @@ namespace FINAL_PROJECT_ST2.Nhanvienbanhangform
         }
 
         private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void guna2Panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void button_newcourse_Click(object sender, EventArgs e)
+        {
+            guna2Panel1.Controls.Clear(); // Xóa control cũ
+            Uc_ThemKhachHang uc = new Uc_ThemKhachHang();
+            uc.Dock = DockStyle.Fill;
+            guna2Panel1.Controls.Add(uc); // Thêm UC vào panel
+        }
+
+        private void guna2Panel1_Paint_1(object sender, PaintEventArgs e)
         {
 
         }

@@ -49,42 +49,6 @@ namespace FINAL_PROJECT_ST2
             return dt;
         }
 
-        // Truy vấn INSERT / UPDATE / DELETE
-        public int ExecuteNonQuery(string query, SqlParameter[] parameters = null)
-        {
-            int affectedRows = 0;
-
-            using (SqlConnection conn = CreateConnection())
-            using (SqlCommand cmd = new SqlCommand(query, conn))
-            {
-                if (parameters != null)
-                    cmd.Parameters.AddRange(parameters);
-
-                conn.Open();
-                affectedRows = cmd.ExecuteNonQuery();
-            }
-
-            return affectedRows;
-        }
-
-        // Truy vấn trả về giá trị đơn (Scalar)
-        public object ExecuteScalar(string query, SqlParameter[] parameters = null)
-        {
-            object result;
-
-            using (SqlConnection conn = CreateConnection())
-            using (SqlCommand cmd = new SqlCommand(query, conn))
-            {
-                if (parameters != null)
-                    cmd.Parameters.AddRange(parameters);
-
-                conn.Open();
-                result = cmd.ExecuteScalar();
-            }
-
-            return result;
-        }
-    
 }
 
 }
