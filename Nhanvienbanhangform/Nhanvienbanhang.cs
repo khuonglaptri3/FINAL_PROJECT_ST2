@@ -83,5 +83,10 @@ namespace FINAL_PROJECT_ST2.Nhanvienbanhangform
         {
 
         }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
