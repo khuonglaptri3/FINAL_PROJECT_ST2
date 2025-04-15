@@ -16,5 +16,10 @@ namespace FINAL_PROJECT_ST2.Nhanvienbanhangform
         {
             InitializeComponent();
         }
+
+        private void Thekhachhang_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
