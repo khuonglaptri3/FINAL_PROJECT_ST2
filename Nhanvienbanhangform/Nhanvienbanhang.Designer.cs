@@ -38,7 +38,6 @@
             this.button_newscore = new System.Windows.Forms.Button();
             this.button_score = new System.Windows.Forms.Button();
             this.panel_subcourse = new System.Windows.Forms.Panel();
-            this.button_stdPrintcourse = new System.Windows.Forms.Button();
             this.button_managecourse = new System.Windows.Forms.Button();
             this.button_newcourse = new System.Windows.Forms.Button();
             this.button_course = new System.Windows.Forms.Button();
@@ -85,7 +84,7 @@
             this.button3.Dock = System.Windows.Forms.DockStyle.Top;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.Font = new System.Drawing.Font("Microsoft Tai Le", 11F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
-            this.button3.Location = new System.Drawing.Point(0, 573);
+            this.button3.Location = new System.Drawing.Point(0, 503);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(226, 67);
             this.button3.TabIndex = 6;
@@ -98,7 +97,7 @@
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Microsoft Tai Le", 11F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
             this.button2.ForeColor = System.Drawing.Color.Black;
-            this.button2.Location = new System.Drawing.Point(0, 506);
+            this.button2.Location = new System.Drawing.Point(0, 436);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(226, 67);
             this.button2.TabIndex = 5;
@@ -111,7 +110,7 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Microsoft Tai Le", 16.2F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.IndianRed;
-            this.button1.Location = new System.Drawing.Point(0, 455);
+            this.button1.Location = new System.Drawing.Point(0, 385);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(226, 51);
             this.button1.TabIndex = 4;
@@ -124,7 +123,7 @@
             this.Panel_subscore.Controls.Add(this.button_newscore);
             this.Panel_subscore.Dock = System.Windows.Forms.DockStyle.Top;
             this.Panel_subscore.Font = new System.Drawing.Font("Microsoft Tai Le", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Panel_subscore.Location = new System.Drawing.Point(0, 322);
+            this.Panel_subscore.Location = new System.Drawing.Point(0, 252);
             this.Panel_subscore.Name = "Panel_subscore";
             this.Panel_subscore.Size = new System.Drawing.Size(226, 133);
             this.Panel_subscore.TabIndex = 3;
@@ -152,6 +151,7 @@
             this.button_newscore.TabIndex = 3;
             this.button_newscore.Text = "Tạo hóa đơn";
             this.button_newscore.UseVisualStyleBackColor = true;
+            this.button_newscore.Click += new System.EventHandler(this.button_newscore_Click);
             // 
             // button_score
             // 
@@ -159,7 +159,7 @@
             this.button_score.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_score.Font = new System.Drawing.Font("Microsoft Tai Le", 16.2F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_score.ForeColor = System.Drawing.Color.IndianRed;
-            this.button_score.Location = new System.Drawing.Point(0, 271);
+            this.button_score.Location = new System.Drawing.Point(0, 201);
             this.button_score.Name = "button_score";
             this.button_score.Size = new System.Drawing.Size(226, 51);
             this.button_score.TabIndex = 3;
@@ -168,28 +168,14 @@
             // 
             // panel_subcourse
             // 
-            this.panel_subcourse.Controls.Add(this.button_stdPrintcourse);
             this.panel_subcourse.Controls.Add(this.button_managecourse);
             this.panel_subcourse.Controls.Add(this.button_newcourse);
             this.panel_subcourse.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel_subcourse.Font = new System.Drawing.Font("Microsoft Tai Le", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panel_subcourse.Location = new System.Drawing.Point(0, 67);
             this.panel_subcourse.Name = "panel_subcourse";
-            this.panel_subcourse.Size = new System.Drawing.Size(226, 204);
+            this.panel_subcourse.Size = new System.Drawing.Size(226, 134);
             this.panel_subcourse.TabIndex = 2;
-            // 
-            // button_stdPrintcourse
-            // 
-            this.button_stdPrintcourse.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button_stdPrintcourse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button_stdPrintcourse.Font = new System.Drawing.Font("Microsoft Tai Le", 11F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
-            this.button_stdPrintcourse.Location = new System.Drawing.Point(0, 134);
-            this.button_stdPrintcourse.Name = "button_stdPrintcourse";
-            this.button_stdPrintcourse.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.button_stdPrintcourse.Size = new System.Drawing.Size(226, 70);
-            this.button_stdPrintcourse.TabIndex = 5;
-            this.button_stdPrintcourse.Text = "Thẻ Thành Viên";
-            this.button_stdPrintcourse.UseVisualStyleBackColor = true;
             // 
             // button_managecourse
             // 
@@ -301,7 +287,6 @@
         private System.Windows.Forms.Button button_newscore;
         private System.Windows.Forms.Button button_score;
         private System.Windows.Forms.Panel panel_subcourse;
-        private System.Windows.Forms.Button button_stdPrintcourse;
         private System.Windows.Forms.Button button_managecourse;
         private System.Windows.Forms.Button button_newcourse;
         private System.Windows.Forms.Button button_course;

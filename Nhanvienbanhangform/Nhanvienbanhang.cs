@@ -116,5 +116,12 @@ namespace FINAL_PROJECT_ST2.Nhanvienbanhangform
             guna2Panel1.Controls.Add(uc);     
 
         }
+
+        private void button_newscore_Click(object sender, EventArgs e)
+        {
+            Uc_TaoHoaDon uc_TaoHoaDon = new Uc_TaoHoaDon();  
+            uc_TaoHoaDon.Dock = DockStyle.Fill;
+            guna2Panel1.Controls.Clear();    
+        }
     }
 }
