@@ -154,6 +154,20 @@ namespace FINAL_PROJECT_ST2.Nhanvienbanhangform
                 MessageBox.Show("Lỗi khi tìm khách hàng: " + ex.Message);
             }
         }
+        public void CapNhatTongTien(int maKH, int maHD)
+        {
+            SqlConnection conn = connect.CreateConnection();
+            conn.Open();
+            // Gọi stored procedure để cập nhật tổng tiền
+            SqlCommand cmd = new SqlCommand("sp_UpdateTongTienTheoLoaiThe", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@MaKH", maKH);
+                cmd.Parameters.AddWithValue("@MaHD", maHD);
+                cmd.ExecuteNonQuery(); // giống như gọi "void"
+            conn.Close();   
+        }
+
 
 
         private void guna2Panel1_Paint(object sender, PaintEventArgs e)
@@ -359,6 +373,19 @@ namespace FINAL_PROJECT_ST2.Nhanvienbanhangform
                     }
 
                     sw.WriteLine($"TỔNG TIỀN: {tongTien:N0} VNĐ");
+                    CapNhatTongTien(int.Parse(txtID.Text), int.Parse(MaHDlabel.Text));
+                    using (SqlConnection conn = connect.CreateConnection())
+                    {
+                        conn.Open();
+                        SqlCommand cmd = new SqlCommand("SELECT dbo.fn_TongTienTheoKHVaHD(@MaKH, @MaHD)", conn);
+                        cmd.Parameters.AddWithValue("@MaKH", int.Parse(txtID.Text)); // Label chứa mã khách hàng
+                        cmd.Parameters.AddWithValue("@MaHD", int.Parse(MaHDlabel.Text)); // Label chứa mã hóa đơn
+
+                        object result = cmd.ExecuteScalar();
+                        if (result != DBNull.Value)
+                            tongTien = Convert.ToDecimal(result);
+                    }
+                    sw.WriteLine($"TỔNG TIỀN SAU KHI AP DUNG THE THANH VIEN: {tongTien:N0} VNĐ");
                     sw.WriteLine("========================================");
                     sw.WriteLine("Xin cảm ơn quý khách!");
                 }
