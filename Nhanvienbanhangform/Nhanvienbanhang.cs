@@ -124,5 +124,13 @@ namespace FINAL_PROJECT_ST2.Nhanvienbanhangform
             uc_TaoHoaDon.Dock = DockStyle.Fill;
             guna2Panel1.Controls.Add(uc_TaoHoaDon); 
         }
+
+        private void button_printsore_Click(object sender, EventArgs e)
+        {
+            guna2Panel1.Controls.Clear();
+            Uchoadondaban uc = new Uchoadondaban();
+            uc.Dock = DockStyle.Fill;
+            guna2Panel1.Controls.Add(uc);    
+        }
     }
 }

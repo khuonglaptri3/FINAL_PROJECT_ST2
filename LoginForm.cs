@@ -35,32 +35,38 @@ namespace FINAL_PROJECT_ST2
             if (Username.Text == "" || Password.Text == "")
             {
                 MessageBox.Show("Please fill in the required information", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
-            else
-            {
-                    try
-                    {
-                    SqlConnection conn = connect.CreateConnection();    
-                    conn.Open();     
-                    bool check = false; // Biến kiểm tra đăng nhập   
-                    using (SqlCommand cmd = new SqlCommand("SELECT dbo.fn_KiemTraDangNhap(@Tentaikhoan, @Matkhau)", conn ))
-                        {
-                            cmd.Parameters.AddWithValue("@Tentaikhoan", Username.Text);
-                            cmd.Parameters.AddWithValue("@Matkhau", Password.Text);
 
-                            // Dùng ExecuteScalar để lấy kết quả trả về từ hàm
-                            object result = cmd.ExecuteScalar();
-                            if (result != null)
-                            {
-                                check = Convert.ToBoolean(result);
-                            }
+            try
+            {
+                // 🔐 Thiết lập lại connection string theo user SQL nhập vào
+                DatabaseHelper.SetConnection(Username.Text, Password.Text);
+
+                // 🔌 Tạo kết nối và mở thử (nếu sai user/pass → SQL Server sẽ báo lỗi)
+                using (SqlConnection conn = new DatabaseHelper().CreateConnection())
+                {
+                    conn.Open(); // kiểm tra đăng nhập thật sự SQL Server
+
+                    bool check = false;
+
+                    // ✅ Kiểm tra tên đăng nhập + mật khẩu có tồn tại trong bảng DANG_NHAP không
+                    using (SqlCommand cmd = new SqlCommand("SELECT dbo.fn_KiemTraDangNhap(@Tentaikhoan, @Matkhau)", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@Tentaikhoan", Username.Text);
+                        cmd.Parameters.AddWithValue("@Matkhau", Password.Text);
+
+                        object result = cmd.ExecuteScalar();
+                        if (result != null)
+                        {
+                            check = Convert.ToBoolean(result);
                         }
-                    // haha
+                    }
 
                     if (check)
                     {
                         MessageBox.Show("Login successful", "Success Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                  
+
                         int maNND = -1;
                         using (SqlCommand cmd = new SqlCommand("SELECT dbo.fn_GetMaNND(@Tentaikhoan, @Matkhau)", conn))
                         {
@@ -68,54 +74,40 @@ namespace FINAL_PROJECT_ST2
                             cmd.Parameters.AddWithValue("@Matkhau", Password.Text);
                             object result = cmd.ExecuteScalar();
                             if (result != null && result != DBNull.Value)
-                            {
                                 maNND = Convert.ToInt32(result);
-                            }
                         }
-                        if (maNND == 1)
-                        {
 
-                            //FINAL_PROJECT_ST2.AdminForm.adminForm adminForm = new FINAL_PROJECT_ST2.AdminForm.adminForm();
-                            //adminForm.Show();
-                            //this.Hide();
-
-                        }
-                        else if (maNND == 3)
+                        // 👉 Phân quyền mở Form theo MaNND
+                        switch (maNND)
                         {
-                            FINAL_PROJECT_ST2.ChucuahangForm.SalesForm chucuahangform = new FINAL_PROJECT_ST2.ChucuahangForm.SalesForm();
-                            chucuahangform.Show();
-                            this.Hide();
+                            case 1:
+                                // FINAL_PROJECT_ST2.AdminForm.adminForm adminForm = new ...();
+                                // adminForm.Show(); this.Hide();
+                                break;
+                            case 2:
+                                new FINAL_PROJECT_ST2.Nhanvienbanhangform.Nhanvienbanhang().Show();
+                                this.Hide();
+                                break;
+                            case 3:
+                                new FINAL_PROJECT_ST2.ChucuahangForm.SalesForm().Show();
+                                this.Hide();
+                                break;
+                            default:
+                                MessageBox.Show("Bạn không có quyền truy cập ứng dụng.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                break;
                         }
-                        else if (maNND == 2)
-                        {
-                            FINAL_PROJECT_ST2.Nhanvienbanhangform.Nhanvienbanhang nhanvienbanhang = new FINAL_PROJECT_ST2.Nhanvienbanhangform.Nhanvienbanhang();
-                            nhanvienbanhang.Show();
-                            this.Hide();
-
-                        }
-                        else { 
-                            FINAL_PROJECT_ST2.NhanviennhapkhoForm.Nhapkho nhapkho = new FINAL_PROJECT_ST2.NhanviennhapkhoForm.Nhapkho();
-                            nhapkho.Show();
-                            this.Hide();     
-                        }
-                        
                     }
                     else
                     {
-                        MessageBox.Show("Login failed", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Sai tài khoản hoặc mật khẩu.", "Đăng nhập thất bại", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Error connecting Database : " + ex.Message, "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    finally
-                    {
-                    connect.CreateConnection().Close();  
-
-                }
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi kết nối SQL Server: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
         private void panel2_Paint(object sender, PaintEventArgs e)
         {

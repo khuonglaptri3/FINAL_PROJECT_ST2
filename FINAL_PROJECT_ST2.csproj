@@ -65,17 +65,17 @@
     <Compile Include="LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Nhanvienbanhangform\FormXacNhan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Nhanvienbanhangform\FormXacNhan.Designer.cs">
+      <DependentUpon>FormXacNhan.cs</DependentUpon>
+    </Compile>
     <Compile Include="Nhanvienbanhangform\Nhanvienbanhang.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Nhanvienbanhangform\Nhanvienbanhang.Designer.cs">
       <DependentUpon>Nhanvienbanhang.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Nhanvienbanhangform\Thekhachhang.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Nhanvienbanhangform\Thekhachhang.Designer.cs">
-      <DependentUpon>Thekhachhang.cs</DependentUpon>
     </Compile>
     <Compile Include="Nhanvienbanhangform\TimkiemkhachhangForm.cs">
       <SubType>UserControl</SubType>
@@ -83,17 +83,17 @@
     <Compile Include="Nhanvienbanhangform\TimkiemkhachhangForm.Designer.cs">
       <DependentUpon>TimkiemkhachhangForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Nhanvienbanhangform\Uchoadondaban.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Nhanvienbanhangform\Uchoadondaban.Designer.cs">
+      <DependentUpon>Uchoadondaban.cs</DependentUpon>
+    </Compile>
     <Compile Include="Nhanvienbanhangform\Uc_TaoHoaDon.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Nhanvienbanhangform\Uc_TaoHoaDon.Designer.cs">
       <DependentUpon>Uc_TaoHoaDon.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NhanviennhapkhoForm\Nhapkho.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="NhanviennhapkhoForm\Nhapkho.Designer.cs">
-      <DependentUpon>Nhapkho.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -109,14 +109,17 @@
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Nhanvienbanhangform\FormXacNhan.resx">
+      <DependentUpon>FormXacNhan.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Nhanvienbanhangform\Nhanvienbanhang.resx">
       <DependentUpon>Nhanvienbanhang.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Nhanvienbanhangform\Thekhachhang.resx">
-      <DependentUpon>Thekhachhang.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Nhanvienbanhangform\TimkiemkhachhangForm.resx">
       <DependentUpon>TimkiemkhachhangForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Nhanvienbanhangform\Uchoadondaban.resx">
+      <DependentUpon>Uchoadondaban.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Nhanvienbanhangform\Uc_TaoHoaDon.resx">
       <DependentUpon>Uc_TaoHoaDon.cs</DependentUpon>

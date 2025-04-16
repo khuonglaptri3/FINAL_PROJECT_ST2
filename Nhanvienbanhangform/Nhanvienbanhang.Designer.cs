@@ -139,6 +139,7 @@
             this.button_printsore.TabIndex = 5;
             this.button_printsore.Text = "Hóa đơn đã bán";
             this.button_printsore.UseVisualStyleBackColor = true;
+            this.button_printsore.Click += new System.EventHandler(this.button_printsore_Click);
             // 
             // button_newscore
             // 

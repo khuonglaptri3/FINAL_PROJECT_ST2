@@ -52,6 +52,21 @@ namespace FINAL_PROJECT_ST2
                 dgvKhachHang.Columns[10].HeaderText = "Ngày Cấp";
                 dgvKhachHang.Columns[11].HeaderText = "Điểm Tích Lũy";
                 dgvKhachHang.Columns[12].HeaderText = "Loại Thẻ";
+                // Đặt tất cả các cột là ReadOnly mặc định
+                foreach (DataGridViewColumn col in dgvKhachHang.Columns)
+                {
+                    col.ReadOnly = true;
+                }
+
+                // Cho phép chỉnh sửa những cột cụ thể
+                string[] editableCols = { "TenKH", "NgaySinh", "SDT", "GioiTinh", "ThanhPho", "Quan", "Duong", "SoNha" };
+
+                foreach (string colName in editableCols)
+                {
+                    if (dgvKhachHang.Columns.Contains(colName))
+                        dgvKhachHang.Columns[colName].ReadOnly = false;
+                }
+
                 conn.Close();
             }
             catch (Exception ex)

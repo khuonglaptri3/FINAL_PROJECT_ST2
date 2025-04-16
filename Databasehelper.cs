@@ -1,35 +1,35 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.SqlClient;
 
 namespace FINAL_PROJECT_ST2
 {
     class DatabaseHelper
     {
-        private string _connectionString;
+        public static string CurrentConnectionString { get; private set; }
 
-        public string ConnectionString
+        // Đặt mặc định là Integrated Security
+        static DatabaseHelper()
         {
-            get => _connectionString;
-            set => _connectionString = value;
+            CurrentConnectionString = @"Data Source=KHUONG;Initial Catalog=TEST_DATABASE;Integrated Security=True;Encrypt=False;TrustServerCertificate=True";
         }
-        public DatabaseHelper()
+
+        // Cấu hình chuỗi kết nối bằng user/password SQL Server
+        //public static void SetConnection(string user, string password)
+        //{
+        //    CurrentConnectionString = $"Data Source=KHUONG;Initial Catalog=TEST_DATABASE;User ID={user};Password={password};Encrypt=False;TrustServerCertificate=True";
+        //}
+        public static void SetConnection(string user, string password)
         {
-            ConnectionString = @"Data Source=KHUONG;Initial Catalog=TEST_DATABASE;Integrated Security=True;Encrypt=False;TrustServerCertificate=True";
+            CurrentConnectionString = "Data Source=KHUONG;Initial Catalog=TEST_DATABASE;User ID=hoasales;Password=sales456 ;Encrypt=False;TrustServerCertificate=True";
         }
-        public DatabaseHelper(string connectionString)
-        {
-            ConnectionString = connectionString;
-        }
+        // Tạo kết nối từ chuỗi tĩnh
         public SqlConnection CreateConnection()
         {
-            return new SqlConnection(ConnectionString);
+            return new SqlConnection(CurrentConnectionString);
         }
-        // Truy vấn SELECT, trả về DataTable
+
+        // Truy vấn trả về bảng
         public DataTable ExecuteQuery(string query, SqlParameter[] parameters = null)
         {
             DataTable dt = new DataTable();
@@ -48,8 +48,5 @@ namespace FINAL_PROJECT_ST2
 
             return dt;
         }
-
-
-}
-
+    }
 }
