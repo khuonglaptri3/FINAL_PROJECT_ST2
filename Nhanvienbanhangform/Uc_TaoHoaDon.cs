@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -115,39 +116,37 @@ namespace FINAL_PROJECT_ST2.Nhanvienbanhangform
 
         private void btnThongTinKH_Click(object sender, EventArgs e)
         {
-            string tuKhoa = txtID.Text.Trim();
-            if (string.IsNullOrEmpty(tuKhoa))
+            if (!int.TryParse(txtID.Text.Trim(), out int maKH))
             {
-                MessageBox.Show("⚠ Vui lòng nhập ID khách hàng để tìm kiếm.");  
+                MessageBox.Show("⚠ Vui lòng nhập số ID khách hàng hợp lệ.");
                 return;
             }
+
             try
             {
-                SqlConnection conn = connect.CreateConnection();
-                conn.Open();
-
-                SqlCommand cmd = new SqlCommand("sp_TimKiemKhachHangNhanh", conn);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@TuKhoa", tuKhoa);
-
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-
-                dgvKhachHang.DataSource = dt;
-                conn.Close();
-
-
-
-                if (dt.Rows.Count > 0)
+                using (SqlConnection conn = connect.CreateConnection())
                 {
-                    hovatenlabel.Text = dt.Rows[0]["TenKH"].ToString();
-                    Sdtlabel.Text = dt.Rows[0]["SDT"].ToString();
-                }
-                else
-                {
-                    hovatenlabel.Text = "Không tìm thấy";
-                    Sdtlabel.Text = "";
+                    conn.Open();
+                    using (SqlCommand cmd = new SqlCommand("sp_TimKhachHangTheoID", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@MaKH", maKH);
+
+                        SqlDataAdapter da = new SqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();
+                        da.Fill(dt);
+
+                        if (dt.Rows.Count > 0)
+                        {
+                            hovatenlabel.Text = dt.Rows[0]["TenKH"].ToString();
+                            Sdtlabel.Text = dt.Rows[0]["SDT"].ToString();
+                        }
+                        else
+                        {
+                            hovatenlabel.Text = "Không tìm thấy";
+                            Sdtlabel.Text = "";
+                        }
+                    }
                 }
             }
             catch (Exception ex)
@@ -155,6 +154,7 @@ namespace FINAL_PROJECT_ST2.Nhanvienbanhangform
                 MessageBox.Show("Lỗi khi tìm khách hàng: " + ex.Message);
             }
         }
+
 
         private void guna2Panel1_Paint(object sender, PaintEventArgs e)
         {
@@ -180,6 +180,7 @@ namespace FINAL_PROJECT_ST2.Nhanvienbanhangform
 
         private void Taohoadonbut_Click(object sender, EventArgs e)
         {
+            btnThongTinKH.PerformClick(); // Gọi hàm tìm khách hàng để lấy thông tin  
             int maKH;
             if (!int.TryParse(txtID.Text.Trim(), out maKH))
             {
@@ -303,5 +304,74 @@ namespace FINAL_PROJECT_ST2.Nhanvienbanhangform
         {
 
         }
+
+
+        private void Xuathoadonbut_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), $"HoaDon_{MaHDlabel.Text}.txt");
+
+                using (StreamWriter sw = new StreamWriter(filePath, false, Encoding.UTF8))
+                {
+                    sw.WriteLine("=========== HÓA ĐƠN BÁN HÀNG ===========");
+                    sw.WriteLine($"Mã hóa đơn: {MaHDlabel.Text}");
+                    sw.WriteLine($"Ngày: {ngaylabel.Text}");
+                    sw.WriteLine("----------------------------------------");
+
+                    sw.WriteLine($"Khách hàng: {hovatenlabel.Text}");
+                    sw.WriteLine($"SĐT: {Sdtlabel.Text}");
+                    sw.WriteLine("----------------------------------------");
+
+                    sw.WriteLine("Sản phẩm:");
+                    sw.WriteLine("MaSP | Tên SP           | SL | Đơn giá | CK | VAT | Thành tiền");
+
+                    foreach (DataGridViewRow row in dvgChitietmua.Rows)
+                    {
+                        if (!row.IsNewRow)
+                        {
+                            string masp = row.Cells["MaSP"].Value.ToString();
+                            string tensp = row.Cells["TenSP"].Value.ToString().PadRight(15);
+                            string soluong = row.Cells["SoLuong"].Value.ToString();
+                            string dongia = Convert.ToDecimal(row.Cells["DonGia"].Value).ToString("N0");
+                            string ck = row.Cells["ChietKhau"].Value.ToString();
+                            string vat = row.Cells["VAT"].Value.ToString();
+                            string thanhtien = Convert.ToDecimal(row.Cells["ThanhTien"].Value).ToString("N0");
+
+                            sw.WriteLine($"{masp} | {tensp} | {soluong} | {dongia} | {ck} | {vat} | {thanhtien}");
+                        }
+                    }
+
+                    sw.WriteLine("----------------------------------------");
+
+                    // 🔥 Lấy tổng tiền từ hàm SQL
+                    decimal tongTien = 0;
+                    using (SqlConnection conn = connect.CreateConnection())
+                    {
+                        conn.Open();
+                        SqlCommand cmd = new SqlCommand("SELECT dbo.fn_TongTienTheoKHVaHD(@MaKH, @MaHD)", conn);
+                        cmd.Parameters.AddWithValue("@MaKH", int.Parse(txtID.Text)); // Label chứa mã khách hàng
+                        cmd.Parameters.AddWithValue("@MaHD", int.Parse(MaHDlabel.Text)); // Label chứa mã hóa đơn
+
+                        object result = cmd.ExecuteScalar();
+                        if (result != DBNull.Value)
+                            tongTien = Convert.ToDecimal(result);
+                    }
+
+                    sw.WriteLine($"TỔNG TIỀN: {tongTien:N0} VNĐ");
+                    sw.WriteLine("========================================");
+                    sw.WriteLine("Xin cảm ơn quý khách!");
+                }
+
+                MessageBox.Show("Xuất hóa đơn thành công!", "Thông báo");
+                System.Diagnostics.Process.Start("explorer.exe", filePath);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi xuất hóa đơn: " + ex.Message);
+            }
+        }
+
+
     }
 }

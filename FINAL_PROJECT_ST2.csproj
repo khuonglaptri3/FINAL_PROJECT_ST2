@@ -52,12 +52,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdminForm\adminForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AdminForm\adminForm.Designer.cs">
-      <DependentUpon>adminForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="ChucuahangForm\ChucuahangForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -109,9 +103,6 @@
     <Compile Include="Nhanvienbanhangform\Uc_ThemKhachHang.Designer.cs">
       <DependentUpon>Uc_ThemKhachHang.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="AdminForm\adminForm.resx">
-      <DependentUpon>adminForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ChucuahangForm\ChucuahangForm.resx">
       <DependentUpon>ChucuahangForm.cs</DependentUpon>
     </EmbeddedResource>

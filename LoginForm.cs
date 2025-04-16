@@ -75,9 +75,9 @@ namespace FINAL_PROJECT_ST2
                         if (maNND == 1)
                         {
 
-                            FINAL_PROJECT_ST2.AdminForm.adminForm adminForm = new FINAL_PROJECT_ST2.AdminForm.adminForm();
-                            adminForm.Show();
-                            this.Hide();
+                            //FINAL_PROJECT_ST2.AdminForm.adminForm adminForm = new FINAL_PROJECT_ST2.AdminForm.adminForm();
+                            //adminForm.Show();
+                            //this.Hide();
 
                         }
                         else if (maNND == 3)
