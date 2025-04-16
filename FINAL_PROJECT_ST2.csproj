@@ -77,6 +77,12 @@
     <Compile Include="Nhanvienbanhangform\Nhanvienbanhang.Designer.cs">
       <DependentUpon>Nhanvienbanhang.cs</DependentUpon>
     </Compile>
+    <Compile Include="Nhanvienbanhangform\Themsanpham.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Nhanvienbanhangform\Themsanpham.Designer.cs">
+      <DependentUpon>Themsanpham.cs</DependentUpon>
+    </Compile>
     <Compile Include="Nhanvienbanhangform\TimkiemkhachhangForm.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -114,6 +120,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Nhanvienbanhangform\Nhanvienbanhang.resx">
       <DependentUpon>Nhanvienbanhang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Nhanvienbanhangform\Themsanpham.resx">
+      <DependentUpon>Themsanpham.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Nhanvienbanhangform\TimkiemkhachhangForm.resx">
       <DependentUpon>TimkiemkhachhangForm.cs</DependentUpon>
