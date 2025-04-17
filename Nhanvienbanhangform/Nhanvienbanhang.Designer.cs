@@ -52,7 +52,6 @@
             this.Panel_subscore.SuspendLayout();
             this.panel_subcourse.SuspendLayout();
             this.panel3.SuspendLayout();
-            this.guna2Panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel_slide
@@ -78,7 +77,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft YaHei UI", 16F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
-            this.label1.Location = new System.Drawing.Point(1251, 730);
+            this.label1.Location = new System.Drawing.Point(222, 29);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(75, 36);
             this.label1.TabIndex = 10;
@@ -94,7 +93,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(226, 67);
             this.button3.TabIndex = 6;
-            this.button3.Text = "Thêm sản phẩm";
+            this.button3.Text = "Thêm/ sửa sản phẩm";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -215,6 +214,7 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.panel3.Controls.Add(this.label1);
             this.panel3.Controls.Add(this.label2);
             this.panel3.Controls.Add(this.label3);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
@@ -229,9 +229,9 @@
             this.label2.Font = new System.Drawing.Font("Microsoft YaHei", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(6, 38);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(310, 27);
+            this.label2.Size = new System.Drawing.Size(189, 27);
             this.label2.TabIndex = 4;
-            this.label2.Text = "Role: NHAN VIEN BAN HANG";
+            this.label2.Text = "Role: NHAN VIEN";
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label3
@@ -246,7 +246,6 @@
             // 
             // guna2Panel1
             // 
-            this.guna2Panel1.Controls.Add(this.label1);
             this.guna2Panel1.Dock = System.Windows.Forms.DockStyle.Right;
             this.guna2Panel1.Location = new System.Drawing.Point(314, 69);
             this.guna2Panel1.Name = "guna2Panel1";
@@ -290,6 +289,7 @@
             this.button5.TabIndex = 13;
             this.button5.Text = "Chi tiết nhập";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button6
             // 
@@ -298,10 +298,11 @@
             this.button6.Font = new System.Drawing.Font("Microsoft Tai Le", 11F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
             this.button6.Location = new System.Drawing.Point(0, 678);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(226, 57);
+            this.button6.Size = new System.Drawing.Size(226, 85);
             this.button6.TabIndex = 14;
-            this.button6.Text = "Chi tiết nhập";
+            this.button6.Text = "Thêm/ Tạo mới phiếu nhập";
             this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // Nhanvienbanhang
             // 
@@ -320,8 +321,6 @@
             this.panel_subcourse.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            this.guna2Panel1.ResumeLayout(false);
-            this.guna2Panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }

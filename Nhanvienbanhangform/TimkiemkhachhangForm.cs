@@ -135,5 +135,10 @@ namespace FINAL_PROJECT_ST2.Nhanvienbanhangform
                 MessageBox.Show("❌ Lỗi khi tìm kiếm: " + ex.Message);
             }
         }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

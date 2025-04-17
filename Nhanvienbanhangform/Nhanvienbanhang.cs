@@ -140,5 +140,21 @@ namespace FINAL_PROJECT_ST2.Nhanvienbanhangform
             uc.Dock = DockStyle.Fill;
             guna2Panel1.Controls.Add(uc);    
         }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            guna2Panel1.Controls.Clear();
+            Themtaomoiphieunhap uc = new Themtaomoiphieunhap();
+            uc.Dock = DockStyle.Fill;
+            guna2Panel1.Controls.Add(uc);    
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            guna2Panel1.Controls.Clear();
+            Uc_chitietnhap uc = new Uc_chitietnhap();
+            uc.Dock = DockStyle.Fill;
+            guna2Panel1.Controls.Add(uc);    
+        }
     }
 }

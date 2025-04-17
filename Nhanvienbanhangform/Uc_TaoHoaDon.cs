@@ -14,11 +14,11 @@ namespace FINAL_PROJECT_ST2.Nhanvienbanhangform
 {
     public partial class Uc_TaoHoaDon : UserControl
     {
-        private DatabaseHelper connect; 
+        private DatabaseHelper connect;
         public Uc_TaoHoaDon()
         {
             InitializeComponent();
-            connect = new DatabaseHelper(); 
+            connect = new DatabaseHelper();
         }
 
         private void dvgChitietmua_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -79,9 +79,9 @@ namespace FINAL_PROJECT_ST2.Nhanvienbanhangform
                 new SqlParameter("@VAT", vat)
                     };
 
-                   connect.ExecuteQuery(query, parameters);
+                    connect.ExecuteQuery(query, parameters);
                     LoadChiTietHoaDon(maHD);
-                    LoadMatHang(); 
+                    LoadMatHang();
                 }
                 catch (Exception ex)
                 {
@@ -160,12 +160,12 @@ namespace FINAL_PROJECT_ST2.Nhanvienbanhangform
             conn.Open();
             // Gọi stored procedure để cập nhật tổng tiền
             SqlCommand cmd = new SqlCommand("sp_UpdateTongTienTheoLoaiThe", conn);
-                cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.AddWithValue("@MaKH", maKH);
-                cmd.Parameters.AddWithValue("@MaHD", maHD);
-                cmd.ExecuteNonQuery(); // giống như gọi "void"
-            conn.Close();   
+            cmd.Parameters.AddWithValue("@MaKH", maKH);
+            cmd.Parameters.AddWithValue("@MaHD", maHD);
+            cmd.ExecuteNonQuery(); // giống như gọi "void"
+            conn.Close();
         }
 
 
@@ -178,11 +178,11 @@ namespace FINAL_PROJECT_ST2.Nhanvienbanhangform
         {
             try
             {
-                
+
                 string query = "SELECT * FROM vw_DanhSachMatHang";
 
                 DataTable dt = connect.ExecuteQuery(query);
-                grvsanpham.DataSource = dt; 
+                grvsanpham.DataSource = dt;
 
             }
             catch (Exception ex)
@@ -219,7 +219,7 @@ namespace FINAL_PROJECT_ST2.Nhanvienbanhangform
                 da.Fill(dt);
                 dvgChitietmua.DataSource = dt;
                 LoadMatHang();
-                LoadLoaiSanPham();   
+                LoadLoaiSanPham();
                 conn.Close();
             }
             catch (Exception ex)
@@ -276,11 +276,11 @@ namespace FINAL_PROJECT_ST2.Nhanvienbanhangform
             new SqlParameter("@MaSP", maSP)
                 };
 
-                connect.ExecuteQuery(query, param); 
+                connect.ExecuteQuery(query, param);
                 MessageBox.Show("Đã xóa sản phẩm khỏi hóa đơn");
 
-                LoadChiTietHoaDon(maHD); 
-                LoadMatHang(); 
+                LoadChiTietHoaDon(maHD);
+                LoadMatHang();
             }
             catch (Exception ex)
             {
