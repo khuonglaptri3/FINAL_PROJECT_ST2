@@ -156,5 +156,58 @@ namespace FINAL_PROJECT_ST2.Nhanvienbanhangform
             uc.Dock = DockStyle.Fill;
             guna2Panel1.Controls.Add(uc);    
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            guna2Panel1.Controls.Clear();    
+            Uc_Danhsachphieunhap uc_Danhsachphieunhap = new Uc_Danhsachphieunhap();
+            uc_Danhsachphieunhap.Dock = DockStyle.Fill;
+            guna2Panel1.Controls.Add(uc_Danhsachphieunhap);  
+        }
+
+        private void panel_slide_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Panel_subscore_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void button_score_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel_subcourse_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void button_course_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel3_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

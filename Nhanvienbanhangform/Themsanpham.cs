@@ -31,6 +31,15 @@ namespace FINAL_PROJECT_ST2.Nhanvienbanhangform
 
                 DataTable dt = connect.ExecuteQuery(query);
                 dgvcacsanpham.DataSource = dt;
+                // Danh sách các cột được chỉnh sửa
+                string[] cotChoPhepSua = { "TenSP", "DonGia", "SLTonKho", "DonViTinh", "MoTaChiTiet", "MaLoai" };
+
+                foreach (DataGridViewColumn col in dgvcacsanpham.Columns)
+                {
+                    // Nếu tên cột nằm trong danh sách cho phép thì cho chỉnh sửa, ngược lại thì khóa
+                    col.ReadOnly = !cotChoPhepSua.Contains(col.Name);
+                }
+
 
             }
             catch (Exception ex)

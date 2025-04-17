@@ -10,14 +10,29 @@ using System.Windows.Forms;
 
 namespace FINAL_PROJECT_ST2.ChucuahangForm
 {
-    public partial class SalesForm : Form
+    public partial class chucuahangform : Form
     {
-        public SalesForm()
+        public chucuahangform()
         {
             InitializeComponent();
         }
 
         private void SalesForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void guna2Panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void panel_slide_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void panel3_Paint(object sender, PaintEventArgs e)
         {
 
         }

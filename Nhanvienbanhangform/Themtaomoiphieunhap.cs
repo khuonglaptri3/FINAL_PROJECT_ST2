@@ -119,5 +119,10 @@ namespace FINAL_PROJECT_ST2.Nhanvienbanhangform
         {
         Loadnhacungung(); 
         }
+
+        private void searchLabel_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

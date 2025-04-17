@@ -154,6 +154,9 @@
     <EmbeddedResource Include="Nhanvienbanhangform\Uc_chitietnhap.resx">
       <DependentUpon>Uc_chitietnhap.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Nhanvienbanhangform\Uc_Danhsachphieunhap.resx">
+      <DependentUpon>Uc_Danhsachphieunhap.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Nhanvienbanhangform\Uc_TaoHoaDon.resx">
       <DependentUpon>Uc_TaoHoaDon.cs</DependentUpon>
     </EmbeddedResource>

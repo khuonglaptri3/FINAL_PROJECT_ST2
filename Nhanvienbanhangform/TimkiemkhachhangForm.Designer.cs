@@ -110,7 +110,7 @@
             this.Deletebut.ForeColor = System.Drawing.Color.White;
             this.Deletebut.Location = new System.Drawing.Point(43, 558);
             this.Deletebut.Name = "Deletebut";
-            this.Deletebut.Size = new System.Drawing.Size(140, 34);
+            this.Deletebut.Size = new System.Drawing.Size(140, 41);
             this.Deletebut.TabIndex = 6;
             this.Deletebut.Text = "Delete";
             this.Deletebut.Click += new System.EventHandler(this.Deletebut_Click);
@@ -126,12 +126,12 @@
             this.txtID.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtID.Font = new System.Drawing.Font("Segoe UI", 10.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtID.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtID.Location = new System.Drawing.Point(258, 565);
+            this.txtID.Location = new System.Drawing.Point(258, 558);
             this.txtID.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtID.Name = "txtID";
             this.txtID.PlaceholderText = "";
             this.txtID.SelectedText = "";
-            this.txtID.Size = new System.Drawing.Size(229, 34);
+            this.txtID.Size = new System.Drawing.Size(229, 41);
             this.txtID.TabIndex = 5;
             // 
             // label2
@@ -154,7 +154,7 @@
             this.Searchbut.ForeColor = System.Drawing.Color.White;
             this.Searchbut.Location = new System.Drawing.Point(43, 641);
             this.Searchbut.Name = "Searchbut";
-            this.Searchbut.Size = new System.Drawing.Size(140, 42);
+            this.Searchbut.Size = new System.Drawing.Size(174, 42);
             this.Searchbut.TabIndex = 7;
             this.Searchbut.Text = "Search";
             this.Searchbut.Click += new System.EventHandler(this.guna2Button1_Click);
@@ -175,7 +175,7 @@
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.PlaceholderText = "";
             this.txtSearch.SelectedText = "";
-            this.txtSearch.Size = new System.Drawing.Size(229, 34);
+            this.txtSearch.Size = new System.Drawing.Size(229, 42);
             this.txtSearch.TabIndex = 8;
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 

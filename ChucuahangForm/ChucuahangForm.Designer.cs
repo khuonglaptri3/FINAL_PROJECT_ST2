@@ -1,6 +1,6 @@
 ﻿namespace FINAL_PROJECT_ST2.ChucuahangForm
 {
-    partial class SalesForm
+    partial class chucuahangform
     {
         /// <summary>
         /// Required designer variable.
@@ -20,6 +20,7 @@
             base.Dispose(disposing);
         }
 
+
         #region Windows Form Designer generated code
 
         /// <summary>
@@ -30,12 +31,13 @@
         {
             this.SuspendLayout();
             // 
-            // SalesForm
+            // chucuahangform
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Name = "SalesForm";
+            this.ClientSize = new System.Drawing.Size(1229, 597);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Name = "chucuahangform";
             this.Text = "SalesForm";
             this.Load += new System.EventHandler(this.SalesForm_Load);
             this.ResumeLayout(false);

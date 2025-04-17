@@ -89,7 +89,7 @@ namespace FINAL_PROJECT_ST2
                                 this.Hide();
                                 break;
                             case 3:
-                                new FINAL_PROJECT_ST2.ChucuahangForm.SalesForm().Show();
+                                new FINAL_PROJECT_ST2.ChucuahangForm.chucuahangform().Show();
                                 this.Hide();
                                 break;
                             default:
