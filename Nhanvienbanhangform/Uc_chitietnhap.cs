@@ -139,6 +139,19 @@ namespace FINAL_PROJECT_ST2.Nhanvienbanhangform
                 DataTable dt = db.ExecuteQuery(query, parameters);
 
                 dvgChitietmua.DataSource = dt; // tên DataGridView hiển thị bên phải
+                foreach (DataGridViewColumn col in dvgChitietmua.Columns)
+                {
+                    // Chỉ cho phép chỉnh sửa 3 cột này
+                    if (col.Name == "SoLuong" || col.Name == "DonGia" || col.Name == "VAT")
+                    {
+                        col.ReadOnly = false;
+                    }
+                    else
+                    {
+                        col.ReadOnly = true;
+                    }
+                }
+
             }
             catch (Exception ex)
             {
@@ -181,7 +194,8 @@ namespace FINAL_PROJECT_ST2.Nhanvienbanhangform
                     conn.Close();
 
                     MessageBox.Show("✅ Đã thêm sản phẩm vào chi tiết phiếu nhập.");
-                    LoadChiTietNhap(maHDN); // Load lại danh sách chi tiết bên phải
+                    LoadChiTietNhap(maHDN);
+                    LoadMatHang(); // Load lại sản phẩm nếu cần 
                 }
                 catch (Exception ex)
                 {
@@ -222,6 +236,50 @@ namespace FINAL_PROJECT_ST2.Nhanvienbanhangform
             }
         }
 
+        private void dgvChiTietNhap_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                // Lấy mã sản phẩm và tên sản phẩm từ dòng được click
+                int maSP = Convert.ToInt32(dvgChitietmua.Rows[e.RowIndex].Cells["MaSP"].Value);
+                string tenSP = dvgChitietmua.Rows[e.RowIndex].Cells["TenSP"].Value.ToString();
+                int maHDN = Convert.ToInt32(txtMaHDN.Text);
+
+                // Hỏi người dùng có muốn xóa không
+                DialogResult result = MessageBox.Show(
+                    $"Bạn có muốn xóa sản phẩm '{tenSP}' khỏi phiếu nhập không?",
+                    "Xác nhận xóa",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question
+                );
+
+                if (result == DialogResult.Yes)
+                {
+                    try
+                    {
+                        using (SqlConnection conn = connect.CreateConnection() )
+                        {
+                            conn.Open();
+                            SqlCommand cmd = new SqlCommand("sp_XoaChiTietNhap", conn);
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@MaHDN", maHDN);
+                            cmd.Parameters.AddWithValue("@MaSP", maSP);
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        MessageBox.Show("✅ Đã xóa sản phẩm khỏi phiếu nhập.");
+
+                        // Refresh lại dữ liệu chi tiết nhập
+                        LoadChiTietNhap(maHDN);
+                        LoadMatHang(); // Load lại sản phẩm nếu cần 
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("❌ Lỗi khi xóa: " + ex.Message);
+                    }
+                }
+            }
+        }
 
 
         private void grvsanpham_CellContentClick(object sender, DataGridViewCellEventArgs e)

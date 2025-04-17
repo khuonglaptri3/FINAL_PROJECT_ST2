@@ -28,8 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // Uc_Danhsachphieunhap
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Name = "Uc_Danhsachphieunhap";
+            this.Size = new System.Drawing.Size(1326, 766);
+            this.ResumeLayout(false);
+
         }
 
         #endregion
