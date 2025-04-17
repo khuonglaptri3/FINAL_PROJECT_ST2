@@ -66,7 +66,7 @@
             this.dgvcacsanpham.RowHeadersVisible = false;
             this.dgvcacsanpham.RowHeadersWidth = 51;
             this.dgvcacsanpham.RowTemplate.Height = 24;
-            this.dgvcacsanpham.Size = new System.Drawing.Size(1322, 514);
+            this.dgvcacsanpham.Size = new System.Drawing.Size(1322, 544);
             this.dgvcacsanpham.TabIndex = 3;
             this.dgvcacsanpham.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
             this.dgvcacsanpham.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -90,6 +90,7 @@
             this.dgvcacsanpham.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvcacsanpham.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             this.dgvcacsanpham.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvcacsanpham_CellContentClick_1);
+            //this.dgvcacsanpham.RowValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSanPham_RowValidated);
             // 
             // Themsanpham
             // 

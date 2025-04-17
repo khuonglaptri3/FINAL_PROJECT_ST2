@@ -44,16 +44,24 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
             this.panel_slide.SuspendLayout();
             this.Panel_subscore.SuspendLayout();
             this.panel_subcourse.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.guna2Panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel_slide
             // 
             this.panel_slide.BackColor = System.Drawing.Color.SpringGreen;
-            this.panel_slide.Controls.Add(this.label1);
+            this.panel_slide.Controls.Add(this.button6);
+            this.panel_slide.Controls.Add(this.button5);
+            this.panel_slide.Controls.Add(this.button4);
+            this.panel_slide.Controls.Add(this.button2);
             this.panel_slide.Controls.Add(this.button3);
             this.panel_slide.Controls.Add(this.button1);
             this.panel_slide.Controls.Add(this.Panel_subscore);
@@ -70,7 +78,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft YaHei UI", 16F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
-            this.label1.Location = new System.Drawing.Point(3, 730);
+            this.label1.Location = new System.Drawing.Point(1251, 730);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(75, 36);
             this.label1.TabIndex = 10;
@@ -88,6 +96,7 @@
             this.button3.TabIndex = 6;
             this.button3.Text = "Thêm sản phẩm";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button1
             // 
@@ -237,12 +246,62 @@
             // 
             // guna2Panel1
             // 
+            this.guna2Panel1.Controls.Add(this.label1);
             this.guna2Panel1.Dock = System.Windows.Forms.DockStyle.Right;
             this.guna2Panel1.Location = new System.Drawing.Point(314, 69);
             this.guna2Panel1.Name = "guna2Panel1";
             this.guna2Panel1.Size = new System.Drawing.Size(1326, 766);
             this.guna2Panel1.TabIndex = 13;
             this.guna2Panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.guna2Panel1_Paint_1);
+            // 
+            // button2
+            // 
+            this.button2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Font = new System.Drawing.Font("Microsoft Tai Le", 16.2F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.ForeColor = System.Drawing.Color.IndianRed;
+            this.button2.Location = new System.Drawing.Point(0, 503);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(226, 51);
+            this.button2.TabIndex = 11;
+            this.button2.Text = "Nhập Kho";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button4
+            // 
+            this.button4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button4.Font = new System.Drawing.Font("Microsoft Tai Le", 11F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            this.button4.Location = new System.Drawing.Point(0, 554);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(226, 67);
+            this.button4.TabIndex = 12;
+            this.button4.Text = "Danh Sách Phiếu Nhập";
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // button5
+            // 
+            this.button5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button5.Font = new System.Drawing.Font("Microsoft Tai Le", 11F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            this.button5.Location = new System.Drawing.Point(0, 621);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(226, 57);
+            this.button5.TabIndex = 13;
+            this.button5.Text = "Chi tiết nhập";
+            this.button5.UseVisualStyleBackColor = true;
+            // 
+            // button6
+            // 
+            this.button6.Dock = System.Windows.Forms.DockStyle.Top;
+            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button6.Font = new System.Drawing.Font("Microsoft Tai Le", 11F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            this.button6.Location = new System.Drawing.Point(0, 678);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(226, 57);
+            this.button6.TabIndex = 14;
+            this.button6.Text = "Chi tiết nhập";
+            this.button6.UseVisualStyleBackColor = true;
             // 
             // Nhanvienbanhang
             // 
@@ -257,11 +316,12 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.Nhanvienbanhang_Load);
             this.panel_slide.ResumeLayout(false);
-            this.panel_slide.PerformLayout();
             this.Panel_subscore.ResumeLayout(false);
             this.panel_subcourse.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            this.guna2Panel1.ResumeLayout(false);
+            this.guna2Panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -283,5 +343,9 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button1;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button2;
     }
 }
