@@ -27,12 +27,7 @@ namespace FINAL_PROJECT_ST2.ChucuahangForm
 
         }
 
-        private void panel_slide_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void panel3_Paint(object sender, PaintEventArgs e)
+        private void button_course_Click(object sender, EventArgs e)
         {
 
         }
