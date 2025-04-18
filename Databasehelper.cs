@@ -50,5 +50,25 @@ namespace FINAL_PROJECT_ST2
 
             return dt;
         }
+        // Truy vấn trả về giá trị đơn giản (scalar)
+        public T ExecuteScalar<T>(string query, SqlParameter[] parameters = null)
+        {
+            using (SqlConnection conn = CreateConnection())
+            using (SqlCommand cmd = new SqlCommand(query, conn))
+            {
+                if (parameters != null)
+                    cmd.Parameters.AddRange(parameters);
+
+                conn.Open();
+                object result = cmd.ExecuteScalar();
+                conn.Close();
+
+                if (result != null && result != DBNull.Value)
+                    return (T)Convert.ChangeType(result, typeof(T));
+                else
+                    return default(T);
+            }
+        }
+
     }
 }

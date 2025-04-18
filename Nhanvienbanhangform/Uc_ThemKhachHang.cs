@@ -74,62 +74,7 @@ namespace FINAL_PROJECT_ST2
                 MessageBox.Show("Lỗi load khách hàng: " + ex.Message);
             }
         }
-        //private void dgvKhachHang_RowValidating(object sender, DataGridViewCellCancelEventArgs e)
-        //{
-        //    if (dgvKhachHang.IsCurrentRowDirty)
-        //    {
-        //        try
-        //        {
-        //            var row = dgvKhachHang.Rows[e.RowIndex];
-
-        //            string tenKH = row.Cells["TenKH"].Value?.ToString();
-        //            string sdt = row.Cells["SDT"].Value?.ToString();
-        //            string gioiTinh = row.Cells["GioiTinh"].Value?.ToString();
-        //            string thanhPho = row.Cells["ThanhPho"].Value?.ToString();
-        //            string quan = row.Cells["Quan"].Value?.ToString();
-        //            string duong = row.Cells["Duong"].Value?.ToString();
-        //            string soNha = row.Cells["SoNha"].Value?.ToString();
-        //            object ngaysinhObj = row.Cells["NgaySinh"].Value;
-
-        //            // Kiểm tra các trường bắt buộc
-        //            if (string.IsNullOrWhiteSpace(tenKH) || string.IsNullOrWhiteSpace(sdt) || ngaysinhObj == null)
-        //            {
-        //                MessageBox.Show("Vui lòng nhập đầy đủ thông tin trước khi lưu!");
-        //                e.Cancel = true;
-        //                return;
-        //            }
-
-        //            DateTime ngaySinh = Convert.ToDateTime(ngaysinhObj);
-
-        //            // Gọi SP qua DatabaseHelper
-        //            DatabaseHelper db = new DatabaseHelper();
-
-        //            SqlParameter[] prms = new SqlParameter[]
-        //            {
-        //        new SqlParameter("@TenKH", tenKH),
-        //        new SqlParameter("@NgaySinh", ngaySinh),
-        //        new SqlParameter("@SDT", sdt),
-        //        new SqlParameter("@GioiTinh", gioiTinh ?? ""),
-        //        new SqlParameter("@ThanhPho", thanhPho ?? ""),
-        //        new SqlParameter("@Quan", quan ?? ""),
-        //        new SqlParameter("@Duong", duong ?? ""),
-        //        new SqlParameter("@SoNha", soNha ?? "")
-        //            };
-
-        //            int result = db.ExecuteNonQuery("sp_ThemKhachHang", prms);
-
-        //            if (result > 0)
-        //            {
-        //                MessageBox.Show("✅ Thêm khách hàng thành công!");
-        //                LoadDanhSachKhachHang();
-        //            }
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            MessageBox.Show("Lỗi khi thêm dòng: " + ex.Message);
-        //        }
-        //    }
-        //}
+   
         private void dgvKhachHang_RowValidating(object sender, DataGridViewCellCancelEventArgs e)
         {
             if (!dgvKhachHang.IsCurrentRowDirty) return;
