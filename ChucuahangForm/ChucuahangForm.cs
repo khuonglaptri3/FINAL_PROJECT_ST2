@@ -221,6 +221,18 @@ namespace FINAL_PROJECT_ST2.ChucuahangForm
             uc.Dock = DockStyle.Fill;
             backgound.Controls.Add(uc);
         }
+
+        private void button_newscore_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Hide(); 
+            FINAL_PROJECT_ST2.Nhanvienbanhangform.Nhanvienbanhang nhanvienbanhang = new FINAL_PROJECT_ST2.Nhanvienbanhangform.Nhanvienbanhang();
+            nhanvienbanhang.Show(); // Hiện form mới     
+        }
     }
     
 }

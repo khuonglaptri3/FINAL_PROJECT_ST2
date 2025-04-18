@@ -197,4 +197,134 @@ BEGIN
 END;
 GO
 
---
+-- trigger kiem tra ma loai co hop le khong khi them san pham moi 
+CREATE OR ALTER TRIGGER trg_KiemTraMaLoaiSanPham
+ON MAT_HANG
+INSTEAD OF INSERT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Kiểm tra mã loại không tồn tại
+    IF EXISTS (
+        SELECT 1
+        FROM INSERTED i
+        WHERE NOT EXISTS (
+            SELECT 1 FROM LOAI_MAT_HANG l WHERE l.MaLoai = i.MaLoai
+        )
+    )
+    BEGIN
+        RAISERROR(N'❌ Mã loại sản phẩm không tồn tại. Vui lòng kiểm tra lại!', 16, 1);
+        ROLLBACK TRANSACTION;
+        RETURN;
+    END
+
+    -- Nếu hợp lệ thì thực hiện thêm
+    INSERT INTO MAT_HANG (TenSP, DonGia, SLTonKho, MoTaChiTiet, DonViTinh, Size, MaLoai)
+    SELECT TenSP, DonGia, SLTonKho, MoTaChiTiet, DonViTinh, Size, MaLoai
+    FROM INSERTED;
+END;
+GO
+-- trigger Dưới đây là phiên bản trigger tổng quát để ngăn xóa sản phẩm (MaSP) nếu đã từng được dùng ở bất kỳ bảng liên quan nào
+CREATE OR ALTER TRIGGER trg_PreventDeleteSanPhamLienKet
+ON MAT_HANG
+INSTEAD OF DELETE
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Kiểm tra nếu tồn tại trong chi tiết hóa đơn mua
+    IF EXISTS (
+        SELECT 1 FROM CHI_TIET_MUA CTM
+        JOIN DELETED D ON CTM.MaSP = D.MaSP
+    )
+    BEGIN
+        RAISERROR(N'❌ Không thể xóa: Sản phẩm đã có trong hóa đơn bán.', 16, 1);
+        ROLLBACK;
+        RETURN;
+    END
+
+    -- Kiểm tra nếu tồn tại trong chi tiết hóa đơn nhập
+    IF EXISTS (
+        SELECT 1 FROM CHI_TIET_NHAP CTN
+        JOIN DELETED D ON CTN.MaSP = D.MaSP
+    )
+    BEGIN
+        RAISERROR(N'❌ Không thể xóa: Sản phẩm đã có trong hóa đơn nhập.', 16, 1);
+        ROLLBACK;
+        RETURN;
+    END
+
+    -- Nếu không có ràng buộc thì xóa bình thường
+    DELETE FROM MAT_HANG WHERE MaSP IN (SELECT MaSP FROM DELETED);
+END;
+GO
+-- trigger cập nhật tổng tiền của 1 hdn khi có sự thay đổi ở chi tiết nhập   
+CREATE OR ALTER TRIGGER trg_UpdateTongTienNhap
+ON CHI_TIET_NHAP
+AFTER INSERT, UPDATE, DELETE
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Tập hợp các MaHDN bị ảnh hưởng
+    DECLARE @MaHDNs TABLE (MaHDN INT);
+
+    INSERT INTO @MaHDNs(MaHDN)
+    SELECT MaHDN FROM inserted
+    UNION
+    SELECT MaHDN FROM deleted;
+
+    -- Cập nhật tổng tiền lại cho từng hóa đơn
+    UPDATE N
+    SET TongTien = ISNULL((
+        SELECT SUM(
+            CTN.SoLuong * MH.DonGia
+            * (1 - ISNULL(CTN.ChietKhau, 0) / 100.0)
+            * (1 + ISNULL(CTN.VAT, 0) / 100.0)
+        )
+        FROM CHI_TIET_NHAP CTN
+        JOIN MAT_HANG MH ON CTN.MaSP = MH.MaSP
+        WHERE CTN.MaHDN = N.MaHDN
+    ), 0)
+    FROM NHAP N
+    INNER JOIN @MaHDNs T ON N.MaHDN = T.MaHDN;
+END;
+GO
+-- trigger cap nhat tong tien khi thay doi gia thanh mat hang o bang mat hang 
+CREATE OR ALTER TRIGGER trg_CapNhatTongTienKhiDonGiaThayDoi
+ON MAT_HANG
+AFTER UPDATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Chỉ xử lý nếu có cập nhật DonGia
+    IF UPDATE(DonGia)
+    BEGIN
+        -- Tập hợp các MaHDN bị ảnh hưởng từ CHI_TIET_NHAP có sản phẩm vừa được cập nhật
+        DECLARE @MaHDNs TABLE (MaHDN INT);
+
+        INSERT INTO @MaHDNs(MaHDN)
+        SELECT DISTINCT CTN.MaHDN
+        FROM CHI_TIET_NHAP CTN
+        JOIN INSERTED I ON CTN.MaSP = I.MaSP;
+
+        -- Cập nhật lại TongTien cho từng MaHDN
+        UPDATE N
+        SET TongTien = ISNULL((
+            SELECT SUM(
+                CTN.SoLuong * MH.DonGia *
+                (1 - ISNULL(CTN.ChietKhau, 0) / 100.0) *
+                (1 + ISNULL(CTN.VAT, 0) / 100.0)
+            )
+            FROM CHI_TIET_NHAP CTN
+            JOIN MAT_HANG MH ON CTN.MaSP = MH.MaSP
+            WHERE CTN.MaHDN = N.MaHDN
+        ), 0)
+        FROM NHAP N
+        JOIN @MaHDNs T ON N.MaHDN = T.MaHDN;
+    END
+END;
+GO
+

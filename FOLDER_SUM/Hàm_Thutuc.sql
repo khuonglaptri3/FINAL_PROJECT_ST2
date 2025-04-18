@@ -382,4 +382,474 @@ BEGIN
     END
 END;
 GO
+-- thủ tục timf kiem hoa don thong qua tu khoa (co the la ten khach hang sdt )
+CREATE OR ALTER FUNCTION fn_TimHoaDonTheoKH (@TuKhoa NVARCHAR(100))
+RETURNS TABLE
+AS
+RETURN
+(
+    SELECT 
+        M.MaHD,
+        M.NgayGiaoDich,
+        KH.MaKH,
+        KH.TenKH,
+        KH.SDT,
+        M.TongTien,
+        LTV.Tenloaithe,
+        TV.DiemTichLuy
+    FROM MUA M
+    JOIN KHACH_HANG KH ON M.MaKH = KH.MaKH
+    LEFT JOIN THE_THANH_VIEN TV ON KH.MaKH = TV.MaKH
+    LEFT JOIN LOAI_THE_THANH_VIEN LTV ON TV.Maloaithe = LTV.Maloaithe
+    WHERE 
+        KH.TenKH LIKE N'%' + @TuKhoa + '%' OR
+        KH.SDT LIKE N'%' + @TuKhoa + '%'
+);
+-- thu tuc xoa hoa don dua tren MaHD 
+CREATE OR ALTER PROCEDURE sp_XoaHoaDon
+    @MaHD INT
+AS
+BEGIN
+    SET NOCOUNT ON;
 
+    DECLARE @MaKH INT;
+
+    -- Lấy MaKH để cập nhật lại điểm sau khi xóa
+    SELECT @MaKH = MaKH FROM MUA WHERE MaHD = @MaHD;
+
+    -- Xóa chi tiết hóa đơn trước
+    DELETE FROM CHI_TIET_MUA WHERE MaHD = @MaHD;
+
+    -- Xóa hóa đơn
+    DELETE FROM MUA WHERE MaHD = @MaHD;
+
+    -- Cập nhật điểm và loại thẻ
+    IF @MaKH IS NOT NULL
+        EXEC sp_CapNhatDiemVaLoaiThe @MaKH;
+END;
+GO
+-- thu tuc lay chi tiet hoa don tu mahd va makh 
+CREATE OR ALTER PROCEDURE sp_LayChiTietHoaDonTheoKH
+    @MaHD INT,
+    @MaKH INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Chỉ lấy chi tiết hóa đơn nếu đúng là của khách hàng đó
+    IF EXISTS (SELECT 1 FROM MUA WHERE MaHD = @MaHD AND MaKH = @MaKH)
+    BEGIN
+        SELECT 
+            mh.MaSP,
+            mh.TenSP,
+            ctm.SoLuong,
+            mh.DonGia,
+            ISNULL(ctm.VAT, 0) AS VAT,
+            ISNULL(ctm.Chietkhau, 0) AS ChietKhau,
+            (mh.DonGia * ctm.SoLuong * 
+             (1 - ISNULL(ctm.Chietkhau, 0) / 100.0) * 
+             (1 + ISNULL(ctm.VAT, 0) / 100.0)) AS ThanhTien
+        FROM CHI_TIET_MUA ctm
+        JOIN MAT_HANG mh ON ctm.MaSP = mh.MaSP
+        WHERE ctm.MaHD = @MaHD;
+    END
+    ELSE
+    BEGIN
+        RAISERROR(N'Hóa đơn không thuộc khách hàng này.', 16, 1);
+    END
+END;
+GO
+-- ham thu tuc xem co them mot san pham moi 
+CREATE OR ALTER PROCEDURE sp_ThemSanPham
+    @TenSP NVARCHAR(100),
+    @DonGia DECIMAL(18,2),
+    @SLTonKho INT,
+    @DonViTinh NVARCHAR(20),
+    @Size NVARCHAR(20),
+    @MoTaChiTiet NVARCHAR(MAX),
+    @MaLoai INT
+AS
+BEGIN
+    INSERT INTO MAT_HANG (TenSP, DonGia, SLTonKho, DonViTinh, Size, MoTaChiTiet, MaLoai)
+    VALUES (@TenSP, @DonGia, @SLTonKho, @DonViTinh, @Size, @MoTaChiTiet, @MaLoai);
+END
+GO
+-- thủ tục cập nhật sản phẩm 
+CREATE OR ALTER PROCEDURE sp_CapNhatSanPham
+    @MaSP INT,
+    @TenSP NVARCHAR(100),
+    @DonGia DECIMAL(18, 2),
+    @SLTonKho INT,
+    @DonViTinh NVARCHAR(20),
+    @Size NVARCHAR(20),
+    @MoTaChiTiet NVARCHAR(MAX),
+    @MaLoai INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Kiểm tra mã loại có tồn tại không
+    IF NOT EXISTS (SELECT 1 FROM LOAI_MAT_HANG WHERE MaLoai = @MaLoai)
+    BEGIN
+        RAISERROR(N'❌ Mã loại sản phẩm không tồn tại.', 16, 1);
+        RETURN;
+    END
+
+    -- Cập nhật thông tin sản phẩm
+    UPDATE MAT_HANG
+    SET 
+        TenSP = @TenSP,
+        DonGia = @DonGia,
+        SLTonKho = @SLTonKho,
+        DonViTinh = @DonViTinh,
+        Size = @Size,
+        MoTaChiTiet = @MoTaChiTiet,
+        MaLoai = @MaLoai
+    WHERE MaSP = @MaSP;
+END;
+GO
+-- thủ tục xóa sản phẩm 
+CREATE OR ALTER PROCEDURE sp_XoaSanPham
+    @MaSP INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Xóa sản phẩm (Trigger sẽ tự kiểm tra nếu sản phẩm liên kết với bảng khác)
+    DELETE FROM MAT_HANG WHERE MaSP = @MaSP;
+END;
+GO
+
+-- tao hóa hóa đơn nhập  qua mã nhà cung ứng 
+CREATE OR ALTER PROCEDURE sp_TaoPhieuNhap
+    @MaNCU INT,
+    @NgayDat DATE = NULL -- cho phép truyền hoặc để mặc định theo thời gian thực
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    IF @NgayDat IS NULL
+        SET @NgayDat = CAST(GETDATE() AS DATE); -- Dùng ngày hiện tại nếu không truyền vào
+
+    INSERT INTO NHAP (NgayDat, TongTien, MaNCU)
+    VALUES (@NgayDat, 0, @MaNCU);
+
+    -- Trả về mã phiếu nhập mới
+    SELECT SCOPE_IDENTITY() AS MaHDN;
+END;
+-- hàm tạo lấy thông tin nhà cung ứng qua mahdnn
+CREATE OR ALTER FUNCTION fn_LayThongTinPhieuNhap(@MaHDN INT)
+RETURNS TABLE
+AS
+RETURN
+(
+    SELECT 
+        N.MaHDN,
+        N.NgayDat,
+        NCU.MaNCU,
+        NCU.TenNCU,
+        NCU.SDT
+    FROM NHAP N
+    JOIN NHA_CUNG_UNG NCU ON N.MaNCU = NCU.MaNCU
+    WHERE N.MaHDN = @MaHDN
+);
+
+
+-- lấy chi tiết hoa don nhap 
+CREATE OR ALTER PROCEDURE sp_LayChiTietNhapTheoHDN
+    @MaHDN INT
+AS
+BEGIN
+    SELECT 
+        MH.MaSP,
+        MH.TenSP,
+        CTN.SoLuong,
+        MH.DonGia,
+        ISNULL(CTN.VAT, 0) AS VAT,
+        ISNULL(CTN.ChietKhau, 0) AS ChietKhau,
+        (MH.DonGia * CTN.SoLuong * 
+         (1 - ISNULL(CTN.ChietKhau, 0) / 100.0) * 
+         (1 + ISNULL(CTN.VAT, 0) / 100.0)) AS ThanhTien
+    FROM CHI_TIET_NHAP CTN
+    JOIN MAT_HANG MH ON CTN.MaSP = MH.MaSP
+    WHERE CTN.MaHDN = @MaHDN;
+END;
+GO
+--- thu tuc them chi tiet hoa don nhap   
+CREATE OR ALTER PROCEDURE sp_ThemChiTietNhap
+    @MaHDN INT,
+    @MaSP INT,
+    @SoLuong INT,
+    @ChietKhau FLOAT = 0,
+    @VAT FLOAT = 0
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    IF @SoLuong <= 0 OR @VAT > 100 OR @ChietKhau > 100
+    BEGIN
+        RAISERROR(N'Dữ liệu không hợp lệ.', 16, 1);
+        RETURN;
+    END
+
+    INSERT INTO CHI_TIET_NHAP (MaHDN, MaSP, SoLuong, ChietKhau, VAT)
+    VALUES (@MaHDN, @MaSP, @SoLuong, @ChietKhau, @VAT);
+
+    UPDATE MAT_HANG
+    SET SLTonKho = SLTonKho + @SoLuong
+    WHERE MaSP = @MaSP;
+END;
+-- sua chi tiết nhập 
+CREATE OR ALTER PROCEDURE sp_SuaChiTietNhap
+    @MaHDN INT,
+    @MaSP INT,
+    @SoLuong INT,
+    @ChietKhau FLOAT,
+    @VAT FLOAT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    IF @SoLuong <= 0 OR @ChietKhau > 100 OR @VAT > 100
+    BEGIN
+        RAISERROR(N'Dữ liệu không hợp lệ.', 16, 1);
+        RETURN;
+    END
+
+    -- 1. Lấy số lượng cũ
+    DECLARE @SoLuongCu INT;
+
+    SELECT @SoLuongCu = SoLuong
+    FROM CHI_TIET_NHAP
+    WHERE MaHDN = @MaHDN AND MaSP = @MaSP;
+
+    IF @SoLuongCu IS NULL
+    BEGIN
+        RAISERROR(N'Dữ liệu chi tiết nhập không tồn tại.', 16, 1);
+        RETURN;
+    END
+
+    -- 2. Tính chênh lệch
+    DECLARE @ChenhLech INT = @SoLuong - @SoLuongCu;
+
+    -- 3. Cập nhật số lượng chi tiết
+    UPDATE CHI_TIET_NHAP
+    SET SoLuong = @SoLuong,
+        ChietKhau = @ChietKhau,
+        VAT = @VAT
+    WHERE MaHDN = @MaHDN AND MaSP = @MaSP;
+
+    -- 4. Cập nhật tồn kho
+    UPDATE MAT_HANG
+    SET SLTonKho = SLTonKho + @ChenhLech
+    WHERE MaSP = @MaSP;
+END;
+
+
+-- sp xoa san pham trong chi tiet nhap 
+CREATE OR ALTER PROCEDURE sp_XoaChiTietNhap
+    @MaHDN INT,
+    @MaSP INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DECLARE @SoLuong INT;
+
+    -- 1. Lấy số lượng nhập để trừ tồn kho
+    SELECT @SoLuong = SoLuong
+    FROM CHI_TIET_NHAP
+    WHERE MaHDN = @MaHDN AND MaSP = @MaSP;
+
+    IF @SoLuong IS NULL
+    BEGIN
+        RAISERROR(N'❌ Không tìm thấy chi tiết nhập để xóa.', 16, 1);
+        RETURN;
+    END
+
+    -- 2. Trừ tồn kho trực tiếp
+    UPDATE MAT_HANG
+    SET SLTonKho = SLTonKho - @SoLuong
+    WHERE MaSP = @MaSP;
+
+    -- 3. Xóa chi tiết nhập
+    DELETE FROM CHI_TIET_NHAP
+    WHERE MaHDN = @MaHDN AND MaSP = @MaSP;
+END;
+--- ham tim kiem hoa don nhap theo tu khoa   
+CREATE OR ALTER FUNCTION fn_TimKiemPhieuNhap
+(
+    @TuKhoa NVARCHAR(100)
+)
+RETURNS TABLE
+AS
+RETURN
+(
+    SELECT 
+        N.MaHDN,
+        N.NgayDat,
+        N.TongTien,
+        NCU.MaNCU,
+        NCU.TenNCU,
+        NCU.SDT
+    FROM NHAP N
+    JOIN NHA_CUNG_UNG NCU ON N.MaNCU = NCU.MaNCU
+    WHERE 
+        -- Tìm theo mã hóa đơn
+        CAST(N.MaHDN AS NVARCHAR) LIKE '%' + @TuKhoa + '%'
+        OR 
+        -- Tìm theo ngày (định dạng yyyy-mm-dd hoặc chỉ yyyy-mm)
+        CONVERT(NVARCHAR, N.NgayDat, 120) LIKE '%' + @TuKhoa + '%'
+        OR 
+        -- Tên nhà cung ứng
+        NCU.TenNCU LIKE '%' + @TuKhoa + '%'
+        OR 
+        -- SĐT nhà cung ứng
+        NCU.SDT LIKE '%' + @TuKhoa + '%'    
+    -- Bạn có thể thêm các trường khác nếu cần
+);
+GO
+-- tim nha cung ung 
+CREATE   FUNCTION fn_TimNhaCungUng (@TuKhoa NVARCHAR(100))
+RETURNS TABLE
+AS
+RETURN
+(
+    SELECT 
+        MaNCU,
+        TenNCU,
+        SDT,
+        Email,
+        CONCAT(SoNha, ', ', Duong, ', ', Quan, ', ', ThanhPho) AS DiaChi
+    FROM NHA_CUNG_UNG
+    WHERE 
+        TenNCU LIKE '%' + @TuKhoa + '%'
+        OR SDT LIKE '%' + @TuKhoa + '%'
+);
+GO
+-- ham khong tham so tra ve gia tri int 
+CREATE OR ALTER FUNCTION fn_DoanhThuHomNay()
+RETURNS DECIMAL(18, 2)
+AS
+BEGIN
+    DECLARE @TongTien DECIMAL(18,2)
+
+    SELECT @TongTien = SUM(TongTien)
+    FROM MUA
+    WHERE NgayGiaoDich = CAST(GETDATE() AS DATE)
+
+    RETURN ISNULL(@TongTien, 0)
+END;
+GO
+CREATE OR ALTER FUNCTION fn_SoHoaDonHomNay()
+RETURNS INT
+AS
+BEGIN
+    DECLARE @SoHD INT
+
+    SELECT @SoHD = COUNT(*)
+    FROM MUA
+    WHERE NgayGiaoDich = CAST(GETDATE() AS DATE)
+
+    RETURN ISNULL(@SoHD, 0)
+END;
+GO
+CREATE OR ALTER FUNCTION fn_TongSoKhachHang()
+RETURNS INT
+AS
+BEGIN
+    RETURN (SELECT COUNT(*) FROM KHACH_HANG)
+END;
+GO
+CREATE OR ALTER FUNCTION fn_SoLuongSanPhamSapHetHang()
+RETURNS INT
+AS
+BEGIN
+    DECLARE @SoLuong INT;
+
+    SELECT @SoLuong = COUNT(*) 
+    FROM MAT_HANG
+    WHERE SLTonKho <= 10;
+
+    RETURN ISNULL(@SoLuong, 0);
+END;
+GO 
+-- thu tuc them nha cung ung 
+CREATE OR ALTER PROCEDURE sp_ThemNhaCungUng
+    @TenNCU NVARCHAR(100),
+    @SDT NVARCHAR(15),
+    @Email NVARCHAR(100),
+    @ThanhPho NVARCHAR(50),
+    @Quan NVARCHAR(50),
+    @Duong NVARCHAR(50),
+    @SoNha NVARCHAR(20)
+AS
+BEGIN
+    -- Kiểm tra trùng Email
+    IF EXISTS (SELECT 1 FROM NHA_CUNG_UNG WHERE Email = @Email)
+    BEGIN
+        RAISERROR(N'❌ Email đã tồn tại. Vui lòng dùng email khác.', 16, 1);
+        RETURN;
+    END
+
+    -- Kiểm tra trùng SDT
+    IF EXISTS (SELECT 1 FROM NHA_CUNG_UNG WHERE SDT = @SDT)
+    BEGIN
+        RAISERROR(N'❌ Số điện thoại đã tồn tại. Vui lòng dùng số khác.', 16, 1);
+        RETURN;
+    END
+
+    -- Thêm mới nếu hợp lệ
+    INSERT INTO NHA_CUNG_UNG (TenNCU, SDT, Email, ThanhPho, Quan, Duong, SoNha)
+    VALUES (@TenNCU, @SDT, @Email, @ThanhPho, @Quan, @Duong, @SoNha);
+END;
+GO  
+-- Thu tuc cap nhat nha cung ung 
+CREATE OR ALTER PROCEDURE sp_CapNhatNhaCungUng
+    @MaNCU INT,
+    @TenNCU NVARCHAR(100),
+    @SDT NVARCHAR(15),
+    @Email NVARCHAR(100),
+    @ThanhPho NVARCHAR(50),
+    @Quan NVARCHAR(50),
+    @Duong NVARCHAR(50),
+    @SoNha NVARCHAR(20)
+AS
+BEGIN
+    UPDATE NHA_CUNG_UNG
+    SET TenNCU = @TenNCU,
+        SDT = @SDT,
+        Email = @Email,
+        ThanhPho = @ThanhPho,
+        Quan = @Quan,
+        Duong = @Duong,
+        SoNha = @SoNha
+    WHERE MaNCU = @MaNCU
+END;
+GO 
+-- ❌ 3. Xóa nhà cung ứng (kiểm tra nếu đã có phiếu nhập)
+CREATE OR ALTER PROCEDURE sp_XoaNhaCungUng
+    @MaNCU INT
+AS
+BEGIN
+    IF EXISTS (SELECT 1 FROM NHAP WHERE MaNCU = @MaNCU)
+    BEGIN
+        RAISERROR(N'❌ Không thể xoá: Nhà cung ứng đã phát sinh nhập hàng.', 16, 1);
+        RETURN;
+    END
+
+    DELETE FROM NHA_CUNG_UNG WHERE MaNCU = @MaNCU;
+END;
+GO 
+-- ham tim kiem nha cung ung theo tu khoa 
+CREATE OR ALTER PROCEDURE sp_TimNhaCungUngTheoTuKhoa
+    @TuKhoa NVARCHAR(100)
+AS
+BEGIN
+    SELECT * FROM NHA_CUNG_UNG
+    WHERE 
+        TenNCU LIKE '%' + @TuKhoa + '%' OR
+        SDT LIKE '%' + @TuKhoa + '%' OR
+        Email LIKE '%' + @TuKhoa + '%';
+END;
+GO  
