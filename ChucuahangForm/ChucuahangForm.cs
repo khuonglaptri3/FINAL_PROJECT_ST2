@@ -233,6 +233,14 @@ namespace FINAL_PROJECT_ST2.ChucuahangForm
             FINAL_PROJECT_ST2.Nhanvienbanhangform.Nhanvienbanhang nhanvienbanhang = new FINAL_PROJECT_ST2.Nhanvienbanhangform.Nhanvienbanhang();
             nhanvienbanhang.Show(); // Hiện form mới     
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            backgound.Controls.Clear();
+            Uc_NhanVien uc = new Uc_NhanVien();
+            uc.Dock = DockStyle.Fill;
+            backgound.Controls.Add(uc); 
+        }
     }
     
 }
