@@ -80,16 +80,16 @@ namespace FINAL_PROJECT_ST2
                         // 👉 Phân quyền mở Form theo MaNND
                         switch (maNND)
                         {
-                            case 1:
-                                // FINAL_PROJECT_ST2.AdminForm.adminForm adminForm = new ...();
-                                // adminForm.Show(); this.Hide();
-                                break;
-                            case 2:
+                            case 2 :
                                 new FINAL_PROJECT_ST2.Nhanvienbanhangform.Nhanvienbanhang().Show();
                                 this.Hide();
                                 break;
                             case 3:
                                 new FINAL_PROJECT_ST2.ChucuahangForm.chucuahangform().Show();
+                                this.Hide();
+                                break;
+                            case 4:
+                                new FINAL_PROJECT_ST2.Nhanvienbanhangform.Nhanvienbanhang().Show();
                                 this.Hide();
                                 break;
                             default:

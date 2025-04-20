@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             this.panel3 = new System.Windows.Forms.Panel();
-            this.Registerbut = new System.Windows.Forms.Button();
-            this.label7 = new System.Windows.Forms.Label();
             this.showpass = new System.Windows.Forms.CheckBox();
             this.Loginbut = new System.Windows.Forms.Button();
             this.Password = new System.Windows.Forms.TextBox();
@@ -50,8 +48,6 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.MintCream;
-            this.panel3.Controls.Add(this.Registerbut);
-            this.panel3.Controls.Add(this.label7);
             this.panel3.Controls.Add(this.showpass);
             this.panel3.Controls.Add(this.Loginbut);
             this.panel3.Controls.Add(this.Password);
@@ -64,28 +60,6 @@
             this.panel3.Size = new System.Drawing.Size(440, 421);
             this.panel3.TabIndex = 0;
             this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
-            // 
-            // Registerbut
-            // 
-            this.Registerbut.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Registerbut.ForeColor = System.Drawing.Color.IndianRed;
-            this.Registerbut.Location = new System.Drawing.Point(234, 361);
-            this.Registerbut.Name = "Registerbut";
-            this.Registerbut.Size = new System.Drawing.Size(142, 36);
-            this.Registerbut.TabIndex = 11;
-            this.Registerbut.Text = "Register here";
-            this.Registerbut.UseVisualStyleBackColor = true;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.label7.ForeColor = System.Drawing.Color.Black;
-            this.label7.Location = new System.Drawing.Point(46, 370);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(167, 18);
-            this.label7.TabIndex = 10;
-            this.label7.Text = "Don\'t have an account ?";
             // 
             // showpass
             // 
@@ -231,8 +205,6 @@
         #endregion
 
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Button Registerbut;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.CheckBox showpass;
         private System.Windows.Forms.Button Loginbut;
         private System.Windows.Forms.TextBox Password;

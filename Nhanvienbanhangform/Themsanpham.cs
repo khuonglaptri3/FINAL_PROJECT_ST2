@@ -32,7 +32,7 @@ namespace FINAL_PROJECT_ST2.Nhanvienbanhangform
                 DataTable dt = connect.ExecuteQuery(query);
                 dgvcacsanpham.DataSource = dt;
                 // Danh sách các cột được chỉnh sửa
-                string[] cotChoPhepSua = { "TenSP", "DonGia", "SLTonKho", "DonViTinh", "MoTaChiTiet", "MaLoai" };
+                string[] cotChoPhepSua = { "TenSP","Size",  "DonGia", "SLTonKho", "DonViTinh", "MoTaChiTiet", "MaLoai" };
 
                 foreach (DataGridViewColumn col in dgvcacsanpham.Columns)
                 {

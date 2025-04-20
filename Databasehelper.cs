@@ -15,17 +15,17 @@ namespace FINAL_PROJECT_ST2
             // Data Source=KHUONG\SQLEXPRESS;Initial Catalog=DATABASESCRIPS;Integrated Security=True;Encrypt=False;TrustServerCertificate=True
         }
 
-        // Cấu hình chuỗi kết nối bằng user/password SQL Server
-        //public static void SetConnection(string user, string password)
-        //{
-        //    CurrentConnectionString = $"Data Source=KHUONG;Initial Catalog=TEST_DATABASE;User ID={user};Password={password};Encrypt=False;TrustServerCertificate=True";
-        //}
+        //Cấu hình chuỗi kết nối bằng user/password SQL Server
         public static void SetConnection(string user, string password)
         {
-            //CurrentConnectionString = $"Data Source=KHUONG;Initial Catalog=TEST_DATABASE;User ID=hoasales;Password=sales456 ;Encrypt=False;TrustServerCertificate=True
-            CurrentConnectionString = @"Data Source=KHUONG\SQLEXPRESS;Initial Catalog=DATABASESCRIPS;Integrated Security=True;Encrypt=False;TrustServerCertificate=True";
-
+            CurrentConnectionString = $"Data Source=KHUONG;Initial Catalog=TEST_DATABASE;User ID={user};Password={password};Encrypt=False;TrustServerCertificate=True";
         }
+        //public static void SetConnection(string user, string password)
+        //{
+        //    CurrentConnectionString = @"Data Source=KHUONG;Initial Catalog=TEST_DATABASE;Integrated Security=True;Encrypt=False;TrustServerCertificate=True";
+        //    //CurrentConnectionString = @"Data Source=KHUONG\SQLEXPRESS;Initial Catalog=DATABASESCRIPS;Integrated Security=True;Encrypt=False;TrustServerCertificate=True";
+
+        //}
         // Tạo kết nối từ chuỗi tĩnh
         public SqlConnection CreateConnection()
         {
