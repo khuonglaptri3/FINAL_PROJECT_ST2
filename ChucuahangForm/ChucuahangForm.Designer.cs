@@ -122,7 +122,7 @@ namespace FINAL_PROJECT_ST2.ChucuahangForm
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft YaHei UI", 16F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
-            this.label10.Location = new System.Drawing.Point(230, 29);
+            this.label10.Location = new System.Drawing.Point(307, 29);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(75, 36);
             this.label10.TabIndex = 11;
