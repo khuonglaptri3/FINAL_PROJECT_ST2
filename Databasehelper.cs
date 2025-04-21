@@ -7,6 +7,18 @@ namespace FINAL_PROJECT_ST2
     class DatabaseHelper
     {
         public static string CurrentConnectionString { get; private set; }
+        public static string username { get; set; }
+        public static string password { get; set; }   
+        public string Username
+        {
+            get { return username; }
+            set { username = value; }
+        }
+        public string Password
+        {
+            get { return password; }
+            set { password = value; }
+        }    
 
         // Đặt mặc định là Integrated Security
         static DatabaseHelper()
@@ -20,13 +32,6 @@ namespace FINAL_PROJECT_ST2
         {
             CurrentConnectionString = $"Data Source=KHUONG;Initial Catalog=TEST_DATABASE;User ID={user};Password={password};Encrypt=False;TrustServerCertificate=True";
         }
-        //public static void SetConnection(string user, string password)
-        //{
-        //    CurrentConnectionString = @"Data Source=KHUONG;Initial Catalog=TEST_DATABASE;Integrated Security=True;Encrypt=False;TrustServerCertificate=True";
-        //    //CurrentConnectionString = @"Data Source=KHUONG\SQLEXPRESS;Initial Catalog=DATABASESCRIPS;Integrated Security=True;Encrypt=False;TrustServerCertificate=True";
-
-        //}
-        // Tạo kết nối từ chuỗi tĩnh
         public SqlConnection CreateConnection()
         {
             return new SqlConnection(CurrentConnectionString);
@@ -70,6 +75,20 @@ namespace FINAL_PROJECT_ST2
                     return default(T);
             }
         }
+        public static string GetThongTinDangNhap(string tenTaiKhoan, string matKhau)
+        {
+            string query = "SELECT dbo.fn_GetThongTinDangNhap(@TenTaiKhoan, @MatKhau)";
+
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+        new SqlParameter("@TenTaiKhoan", tenTaiKhoan),
+        new SqlParameter("@MatKhau", matKhau)
+            };
+
+            DatabaseHelper db = new DatabaseHelper();
+            return db.ExecuteScalar<string>(query, parameters);
+        }
+
 
     }
 }

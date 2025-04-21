@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FINAL_PROJECT_ST2.ChucuahangForm;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,50 +19,23 @@ namespace FINAL_PROJECT_ST2.Nhanvienbanhangform
         {
             connect = new DatabaseHelper();
             InitializeComponent();
-            //showallmembership(); 
+            hienthithongtinnhanvien();
         }
-        //private void showallmembership()
-        //{
-        //    try
-        //    {
-        //        SqlConnection conn = connect.CreateConnection();
-        //        conn.Open();
+        public void hienthithongtinnhanvien()
+        {
+            string thongTin = DatabaseHelper.GetThongTinDangNhap(connect.Username, connect.Password);
 
-        //        string query = "SELECT * FROM v_TatCaKhachHang";
-        //        SqlCommand cmd = new SqlCommand(query, conn);
-        //        SqlDataAdapter da = new SqlDataAdapter(cmd);
-        //        DataTable dt = new DataTable();
-        //        da.Fill(dt);
+            if (!thongTin.Contains("không hợp lệ"))
+            {
+                lblWelcome.Text = "👋 Xin chào: " + thongTin.Split('-')[0].Trim();
+                lblRole.Text = "🔐 Vai trò: " + thongTin.Split('-')[1].Trim();
+            }
+            else
+            {
+                MessageBox.Show("❌ " + thongTin, "Lỗi đăng nhập", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
-        //        guna2DataGridView1.DataSource = dt;
-        //        guna2DataGridView1.Columns[0].HeaderText = "Mã KH";
-        //        guna2DataGridView1.Columns[1].HeaderText = "Tên KH";
-        //        guna2DataGridView1.Columns[2].HeaderText = "Ngày Sinh";
-        //        guna2DataGridView1.Columns[3].HeaderText = "SĐT";
-        //        guna2DataGridView1.Columns[4].HeaderText = "Giới Tính";
-        //        guna2DataGridView1.Columns[5].HeaderText = "Thành Phố";
-        //        guna2DataGridView1.Columns[6].HeaderText = "Quận";
-        //        guna2DataGridView1.Columns[7].HeaderText = "Đường";
-        //        guna2DataGridView1.Columns[8].HeaderText = "Số Nhà";
-        //        guna2DataGridView1.Columns[9].HeaderText = "Mã Số Thẻ";
-        //        guna2DataGridView1.Columns[10].HeaderText = "Ngày Cấp";
-        //        guna2DataGridView1.Columns[11].HeaderText = "Điểm Tích Lũy";
-        //        guna2DataGridView1.Columns[12].HeaderText = "Loại Thẻ";
-               
-
-
-        //        guna2DataGridView1.DefaultCellStyle.Font = new Font("Segoe UI", 10); // Hoặc font bạn thích
-        //        guna2DataGridView1.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 11, FontStyle.Bold);
-
-        //        guna2DataGridView1.ScrollBars = ScrollBars.Both;
-
-        //        conn.Close();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show("Lỗi khi hiển thị thẻ thành viên: " + ex.Message);
-        //    }
-        //}
+        }
 
 
         private void Nhanvienbanhang_Load(object sender, EventArgs e)
@@ -208,6 +182,13 @@ namespace FINAL_PROJECT_ST2.Nhanvienbanhangform
         private void label3_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            chucuahangform chucuahangform = new chucuahangform();
+            chucuahangform.Show();   
         }
     }
 }

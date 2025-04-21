@@ -46,8 +46,8 @@ namespace FINAL_PROJECT_ST2.ChucuahangForm
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label10 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lblRole = new System.Windows.Forms.Label();
+            this.lblWelcome = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -109,44 +109,45 @@ namespace FINAL_PROJECT_ST2.ChucuahangForm
             // 
             this.panel3.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.panel3.Controls.Add(this.label10);
-            this.panel3.Controls.Add(this.label2);
-            this.panel3.Controls.Add(this.label3);
+            this.panel3.Controls.Add(this.lblRole);
+            this.panel3.Controls.Add(this.lblWelcome);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 80);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1640, 69);
             this.panel3.TabIndex = 12;
+            this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
             // 
             // label10
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft YaHei UI", 16F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
-            this.label10.Location = new System.Drawing.Point(218, 33);
+            this.label10.Location = new System.Drawing.Point(230, 29);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(75, 36);
             this.label10.TabIndex = 11;
             this.label10.Text = "EXIT";
             this.label10.Click += new System.EventHandler(this.label10_Click);
             // 
-            // label2
+            // lblRole
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft YaHei", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(6, 38);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(206, 27);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Role: Chu cua hang";
+            this.lblRole.AutoSize = true;
+            this.lblRole.Font = new System.Drawing.Font("Microsoft YaHei", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRole.Location = new System.Drawing.Point(6, 38);
+            this.lblRole.Name = "lblRole";
+            this.lblRole.Size = new System.Drawing.Size(206, 27);
+            this.lblRole.TabIndex = 4;
+            this.lblRole.Text = "Role: Chu cua hang";
             // 
-            // label3
+            // lblWelcome
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft YaHei", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(6, 3);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(107, 27);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "Welcome";
+            this.lblWelcome.AutoSize = true;
+            this.lblWelcome.Font = new System.Drawing.Font("Microsoft YaHei", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblWelcome.Location = new System.Drawing.Point(6, 3);
+            this.lblWelcome.Name = "lblWelcome";
+            this.lblWelcome.Size = new System.Drawing.Size(107, 27);
+            this.lblWelcome.TabIndex = 3;
+            this.lblWelcome.Text = "Welcome";
             // 
             // panel4
             // 
@@ -156,6 +157,7 @@ namespace FINAL_PROJECT_ST2.ChucuahangForm
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(1640, 97);
             this.panel4.TabIndex = 13;
+            this.panel4.Paint += new System.Windows.Forms.PaintEventHandler(this.panel4_Paint);
             // 
             // panel2
             // 
@@ -270,6 +272,7 @@ namespace FINAL_PROJECT_ST2.ChucuahangForm
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1640, 80);
             this.panel1.TabIndex = 11;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // tblMain
             // 
@@ -686,8 +689,8 @@ namespace FINAL_PROJECT_ST2.ChucuahangForm
         #endregion
 
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblRole;
+        private System.Windows.Forms.Label lblWelcome;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.PictureBox pictureBox1;

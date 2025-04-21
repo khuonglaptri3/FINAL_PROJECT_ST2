@@ -42,6 +42,8 @@ namespace FINAL_PROJECT_ST2
             {
                 // 🔐 Thiết lập lại connection string theo user SQL nhập vào
                 DatabaseHelper.SetConnection(Username.Text, Password.Text);
+                DatabaseHelper.username = Username.Text;
+                DatabaseHelper.password = Password.Text; // Lưu lại username/password để dùng cho các form khác  
 
                 // 🔌 Tạo kết nối và mở thử (nếu sai user/pass → SQL Server sẽ báo lỗi)
                 using (SqlConnection conn = new DatabaseHelper().CreateConnection())

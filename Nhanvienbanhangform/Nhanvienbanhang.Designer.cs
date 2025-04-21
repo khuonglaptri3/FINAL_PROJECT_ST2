@@ -45,8 +45,9 @@
             this.button_course = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.lblRole = new System.Windows.Forms.Label();
+            this.lblWelcome = new System.Windows.Forms.Label();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             this.panel_slide.SuspendLayout();
             this.Panel_subscore.SuspendLayout();
@@ -263,7 +264,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft YaHei UI", 16F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
-            this.label1.Location = new System.Drawing.Point(222, 29);
+            this.label1.Location = new System.Drawing.Point(133, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(75, 36);
             this.label1.TabIndex = 10;
@@ -273,9 +274,10 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.panel3.Controls.Add(this.label4);
             this.panel3.Controls.Add(this.label1);
-            this.panel3.Controls.Add(this.label2);
-            this.panel3.Controls.Add(this.label3);
+            this.panel3.Controls.Add(this.lblRole);
+            this.panel3.Controls.Add(this.lblWelcome);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
@@ -283,27 +285,38 @@
             this.panel3.TabIndex = 12;
             this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
             // 
-            // label2
+            // label4
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft YaHei", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(6, 38);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(189, 27);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Role: NHAN VIEN";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft YaHei UI", 16F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            this.label4.Location = new System.Drawing.Point(3, 9);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(90, 36);
+            this.label4.TabIndex = 11;
+            this.label4.Text = "BACK";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
-            // label3
+            // lblRole
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft YaHei", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(6, 3);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(107, 27);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "Welcome";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
+            this.lblRole.AutoSize = true;
+            this.lblRole.Font = new System.Drawing.Font("Microsoft YaHei", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRole.Location = new System.Drawing.Point(636, 38);
+            this.lblRole.Name = "lblRole";
+            this.lblRole.Size = new System.Drawing.Size(189, 27);
+            this.lblRole.TabIndex = 4;
+            this.lblRole.Text = "Role: NHAN VIEN";
+            this.lblRole.Click += new System.EventHandler(this.label2_Click);
+            // 
+            // lblWelcome
+            // 
+            this.lblWelcome.AutoSize = true;
+            this.lblWelcome.Font = new System.Drawing.Font("Microsoft YaHei", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblWelcome.Location = new System.Drawing.Point(636, 0);
+            this.lblWelcome.Name = "lblWelcome";
+            this.lblWelcome.Size = new System.Drawing.Size(107, 27);
+            this.lblWelcome.TabIndex = 3;
+            this.lblWelcome.Text = "Welcome";
+            this.lblWelcome.Click += new System.EventHandler(this.label3_Click);
             // 
             // guna2Panel1
             // 
@@ -347,8 +360,8 @@
         private System.Windows.Forms.Button button_course;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblRole;
+        private System.Windows.Forms.Label lblWelcome;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button1;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
@@ -356,5 +369,6 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label label4;
     }
 }

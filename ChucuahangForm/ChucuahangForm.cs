@@ -28,6 +28,7 @@ namespace FINAL_PROJECT_ST2.ChucuahangForm
             LoadSanPhamSapHet();
             LoadPieChartTyLeDoanhThu();
             LoadSanPhamBanCham();
+            hienthithongtinnhanvien();  
 
         }
         private void LoadDashboardTongQuan()
@@ -148,7 +149,21 @@ namespace FINAL_PROJECT_ST2.ChucuahangForm
                 MessageBox.Show("❌ Lỗi khi tải sản phẩm bán chậm: " + ex.Message);
             }
         }
+        public void hienthithongtinnhanvien()
+        {
+            string thongTin = DatabaseHelper.GetThongTinDangNhap(connect.Username , connect.Password);
 
+            if (!thongTin.Contains("không hợp lệ"))
+            {
+                lblWelcome.Text = "👋 Xin chào: " + thongTin.Split('-')[0].Trim();
+                lblRole.Text = "🔐 Vai trò: " + thongTin.Split('-')[1].Trim();
+            }
+            else
+            {
+                MessageBox.Show("❌ " + thongTin, "Lỗi đăng nhập", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
 
 
 
@@ -240,6 +255,21 @@ namespace FINAL_PROJECT_ST2.ChucuahangForm
             Uc_NhanVien uc = new Uc_NhanVien();
             uc.Dock = DockStyle.Fill;
             backgound.Controls.Add(uc); 
+        }
+
+        private void panel3_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void panel4_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
     
