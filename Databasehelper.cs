@@ -25,12 +25,14 @@ namespace FINAL_PROJECT_ST2
         {
             CurrentConnectionString = @"Data Source=KHUONG;Initial Catalog=khuong;User ID={user};Password={password};Encrypt=False;Trust Server Certificate=True";
             // Data Source=KHUONG\SQLEXPRESS;Initial Catalog=DATABASESCRIPS;Integrated Security=True;Encrypt=False;TrustServerCertificate=True
+            //Data Source=KHUONG\SQLEXPRESS;Initial Catalog=QUAN_LY_CUA_HANG;Integrated Security=True;Encrypt=False;Trust Server Certificate=True
+            // Data Source=KHUONG;Initial Catalog=Test;Integrated Security=True;Encrypt=False;Trust Server Certificate=True
         }
 
         //Cấu hình chuỗi kết nối bằng user/password SQL Server
         public static void SetConnection(string user, string password)
         {
-            CurrentConnectionString = $"Data Source=KHUONG;Initial Catalog=TEST_DATABASE;;User ID={user};Password={password};Encrypt=False;TrustServerCertificate=True";
+            CurrentConnectionString = $"Data Source=KHUONG;Initial Catalog=Test;User ID={user};Password={password};Encrypt=False;TrustServerCertificate=True";
         }
         public SqlConnection CreateConnection()
         {
