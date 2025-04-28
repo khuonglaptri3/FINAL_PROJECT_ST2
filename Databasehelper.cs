@@ -23,14 +23,14 @@ namespace FINAL_PROJECT_ST2
         // Đặt mặc định là Integrated Security
         static DatabaseHelper()
         {
-            CurrentConnectionString = @"Data Source=KHUONG;Initial Catalog=TEST_DATABASE;Integrated Security=True;Encrypt=False;TrustServerCertificate=True";
+            CurrentConnectionString = @"Data Source=KHUONG;Initial Catalog=khuong;User ID={user};Password={password};Encrypt=False;Trust Server Certificate=True";
             // Data Source=KHUONG\SQLEXPRESS;Initial Catalog=DATABASESCRIPS;Integrated Security=True;Encrypt=False;TrustServerCertificate=True
         }
 
         //Cấu hình chuỗi kết nối bằng user/password SQL Server
         public static void SetConnection(string user, string password)
         {
-            CurrentConnectionString = $"Data Source=KHUONG;Initial Catalog=TEST_DATABASE;User ID={user};Password={password};Encrypt=False;TrustServerCertificate=True";
+            CurrentConnectionString = $"Data Source=KHUONG;Initial Catalog=TEST_DATABASE;;User ID={user};Password={password};Encrypt=False;TrustServerCertificate=True";
         }
         public SqlConnection CreateConnection()
         {

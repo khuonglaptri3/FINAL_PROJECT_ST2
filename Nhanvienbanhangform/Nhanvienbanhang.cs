@@ -69,11 +69,17 @@ namespace FINAL_PROJECT_ST2.Nhanvienbanhangform
         }
 
         private void button_newcourse_Click(object sender, EventArgs e)
-        {
-            guna2Panel1.Controls.Clear(); // Xóa control cũ
-            Uc_ThemKhachHang uc = new Uc_ThemKhachHang();
-            uc.Dock = DockStyle.Fill;
-            guna2Panel1.Controls.Add(uc); // Thêm UC vào panel
+        { try
+            {
+                guna2Panel1.Controls.Clear(); // Xóa control cũ
+                Uc_ThemKhachHang uc = new Uc_ThemKhachHang();
+                uc.Dock = DockStyle.Fill;
+                guna2Panel1.Controls.Add(uc); // Thêm UC vào panel
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(" Ban khong co quyen de truy cap  ");
+            }
         }
 
         private void guna2Panel1_Paint_1(object sender, PaintEventArgs e)
@@ -83,60 +89,113 @@ namespace FINAL_PROJECT_ST2.Nhanvienbanhangform
         }
 
         private void button_managecourse_Click(object sender, EventArgs e)
-        {
-            guna2Panel1.Controls.Clear();   
-            TimkiemkhachhangForm uc = new TimkiemkhachhangForm();    
-            uc.Dock = DockStyle.Fill;    
-            guna2Panel1.Controls.Add(uc);     
 
+        {
+            try
+            {
+                guna2Panel1.Controls.Clear();
+                TimkiemkhachhangForm uc = new TimkiemkhachhangForm();
+                uc.Dock = DockStyle.Fill;
+                guna2Panel1.Controls.Add(uc);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(" Ban khong co quyen de truy cap  " + ex.Message);
+
+            }
         }
 
         private void button_newscore_Click(object sender, EventArgs e)
         {
-            guna2Panel1.Controls.Clear();
-            Uc_TaoHoaDon uc_TaoHoaDon = new Uc_TaoHoaDon();  
-            uc_TaoHoaDon.Dock = DockStyle.Fill;
-            guna2Panel1.Controls.Add(uc_TaoHoaDon); 
+            try
+            {
+                guna2Panel1.Controls.Clear();
+                Uc_TaoHoaDon uc_TaoHoaDon = new Uc_TaoHoaDon();
+                uc_TaoHoaDon.Dock = DockStyle.Fill;
+                guna2Panel1.Controls.Add(uc_TaoHoaDon);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(" Ban khong co quyen de truy cap  " + ex.Message);
+            }   
         }
 
         private void button_printsore_Click(object sender, EventArgs e)
         {
-            guna2Panel1.Controls.Clear();
-            Uchoadondaban uc = new Uchoadondaban();
-            uc.Dock = DockStyle.Fill;
-            guna2Panel1.Controls.Add(uc);    
+            try
+            {
+                guna2Panel1.Controls.Clear();
+                Uchoadondaban uc = new Uchoadondaban();
+                uc.Dock = DockStyle.Fill;
+                guna2Panel1.Controls.Add(uc);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(" Ban khong co quyen de truy cap  " + ex.Message);
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            guna2Panel1.Controls.Clear();
-            Themsanpham uc = new Themsanpham();
-            uc.Dock = DockStyle.Fill;
-            guna2Panel1.Controls.Add(uc);    
+            try
+            {
+                guna2Panel1.Controls.Clear();
+                Themsanpham uc = new Themsanpham();
+                uc.Dock = DockStyle.Fill;
+                guna2Panel1.Controls.Add(uc);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(" Ban khong co quyen de truy cap  " + ex.Message);
+
+            }
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            guna2Panel1.Controls.Clear();
-            Themtaomoiphieunhap uc = new Themtaomoiphieunhap();
-            uc.Dock = DockStyle.Fill;
-            guna2Panel1.Controls.Add(uc);    
+            try
+            {
+                guna2Panel1.Controls.Clear();
+                Themtaomoiphieunhap uc = new Themtaomoiphieunhap();
+                uc.Dock = DockStyle.Fill;
+                guna2Panel1.Controls.Add(uc);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(" Ban khong co quyen de truy cap  " + ex.Message);
+            }
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            guna2Panel1.Controls.Clear();
-            Uc_chitietnhap uc = new Uc_chitietnhap();
-            uc.Dock = DockStyle.Fill;
-            guna2Panel1.Controls.Add(uc);    
+            try
+            {
+                guna2Panel1.Controls.Clear();
+                Uc_chitietnhap uc = new Uc_chitietnhap();
+                uc.Dock = DockStyle.Fill;
+                guna2Panel1.Controls.Add(uc);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(" Ban khong co quyen de truy cap  " + ex.Message);
+
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            guna2Panel1.Controls.Clear();    
-            Uc_Danhsachphieunhap uc_Danhsachphieunhap = new Uc_Danhsachphieunhap();
-            uc_Danhsachphieunhap.Dock = DockStyle.Fill;
-            guna2Panel1.Controls.Add(uc_Danhsachphieunhap);  
+            try
+            {
+                guna2Panel1.Controls.Clear();
+                Uc_Danhsachphieunhap uc_Danhsachphieunhap = new Uc_Danhsachphieunhap();
+                uc_Danhsachphieunhap.Dock = DockStyle.Fill;
+                guna2Panel1.Controls.Add(uc_Danhsachphieunhap);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(" Ban khong co quyen de truy cap  " + ex.Message);
+
+            }
         }
 
         private void panel_slide_Paint(object sender, PaintEventArgs e)
@@ -186,9 +245,17 @@ namespace FINAL_PROJECT_ST2.Nhanvienbanhangform
 
         private void label4_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            chucuahangform chucuahangform = new chucuahangform();
-            chucuahangform.Show();   
+            try
+            {
+                this.Hide();
+                chucuahangform chucuahangform = new chucuahangform();
+                chucuahangform.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(" Ban khong co quyen de truy cap  " );
+
+            }
         }
     }
 }

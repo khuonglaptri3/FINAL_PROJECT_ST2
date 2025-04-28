@@ -112,11 +112,32 @@ namespace FINAL_PROJECT_ST2.ChucuahangForm
                 string tenDangNhap = "user" + maNV;
                 string matKhau = "123456";
 
-                // 🔐 Tạo Login/User SQL bằng stored procedure
+                // 🔵 Lấy MaNND dựa trên MaNV mới
+                int maNND = -1;
+                using (SqlCommand cmdGetMaNND = new SqlCommand("SELECT dbo.fn_GetMaNND_By_MaNV(@MaNV)", connect.CreateConnection()))
+                {
+                    cmdGetMaNND.CommandType = CommandType.Text;
+                    cmdGetMaNND.Parameters.AddWithValue("@MaNV", maNV);
+
+                    cmdGetMaNND.Connection.Open();
+                    object maNNDFromDB = cmdGetMaNND.ExecuteScalar();
+                    cmdGetMaNND.Connection.Close();
+
+                    if (maNNDFromDB != null)
+                        maNND = Convert.ToInt32(maNNDFromDB);
+                    else
+                    {
+                        MessageBox.Show("❌ Không tìm thấy MaNND cho nhân viên mới.");
+                        return;
+                    }
+                }
+
+                // 🔐 Gọi thủ tục tạo login + user + gán role
                 SqlCommand cmdLogin = new SqlCommand("sp_TaoLoginChoNhanVien", connect.CreateConnection());
                 cmdLogin.CommandType = CommandType.StoredProcedure;
                 cmdLogin.Parameters.AddWithValue("@TenDangNhap", tenDangNhap);
                 cmdLogin.Parameters.AddWithValue("@MatKhau", matKhau);
+                cmdLogin.Parameters.AddWithValue("@MaNND", maNND); // 🔥 Gửi đúng MaNND
                 cmdLogin.Connection.Open();
                 cmdLogin.ExecuteNonQuery();
                 cmdLogin.Connection.Close();
@@ -131,6 +152,7 @@ namespace FINAL_PROJECT_ST2.ChucuahangForm
                 e.Cancel = true;
             }
         }
+
 
         private void dgvNhanVien_RowValidated(object sender, DataGridViewCellEventArgs e)
         {
