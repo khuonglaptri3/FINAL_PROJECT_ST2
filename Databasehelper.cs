@@ -28,11 +28,12 @@ namespace FINAL_PROJECT_ST2
             //Data Source=KHUONG\SQLEXPRESS;Initial Catalog=QUAN_LY_CUA_HANG;Integrated Security=True;Encrypt=False;Trust Server Certificate=True
             // Data Source=KHUONG;Initial Catalog=Test;Integrated Security=True;Encrypt=False;Trust Server Certificate=True
         }
-
+        // Data Source=KHUONG\SQLEXPRESS;Initial Catalog=ffff;Integrated Security=True;Encrypt=False;Trust Server Certificate=True
         //Cấu hình chuỗi kết nối bằng user/password SQL Server
+        // Data Source=KHUONG\SQLEXPRESS;Initial Catalog=KHUONG;Integrated Security=True;Encrypt=False;Trust Server Certificate=True
         public static void SetConnection(string user, string password)
         {
-            CurrentConnectionString = $"Data Source=KHUONG;Initial Catalog=Test;User ID={user};Password={password};Encrypt=False;TrustServerCertificate=True";
+            CurrentConnectionString = $"Data Source=KHUONG\\SQLEXPRESS;Initial Catalog=KHUONGGGG;User ID={user};Password={password};Encrypt=False;TrustServerCertificate=True";
         }
         public SqlConnection CreateConnection()
         {
